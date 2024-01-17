@@ -1,21 +1,28 @@
 // router.js
 import { createRouter, createWebHistory } from 'vue-router';
 
-const MainNavbar = import("./components/Layout/MainHeader.vue")
+const MainHeader = import("./components/Layout/MainHeader.vue")
 const Home = import("./pages/Home.vue")
-const About = import('./pages/About.vue')
+const GlobalMap = import('./pages/GlobalMapView.vue')
 
 const routes = [
   {
     path: '/',
     name: 'index',
-    components: { default: Home, header: MainNavbar},
+    components: { default: Home, header: MainHeader},
     props: {
       header: { colorOnScroll: 400 },
       footer: { backgroundColor: 'black' }
     }
   },
-  { path: '/about', name: 'About', component: About },
+  {
+    path: '/about',
+    name: 'About', 
+    components: { default: GlobalMap, header: MainHeader },
+    props: {
+      header: { colorOnScroll: 400 },
+    }
+  },
    
 //   {
 //     path: '/landing',

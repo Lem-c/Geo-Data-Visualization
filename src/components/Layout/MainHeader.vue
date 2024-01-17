@@ -7,8 +7,11 @@
     menu-classes="ml-auto"
   >
     <template  v-slot:navbar-menu>
-      <nav-link to="/about">
-          <i class="now-ui-icons business_chart-pie-36"></i> About
+      <nav-link v-if="$route.path !== '/about'" to="/about">
+        <i class="now-ui-icons business_chart-pie-36"></i> About
+      </nav-link>
+      <nav-link v-else to="/">
+        <i class="now-ui-icons objects_globe"></i> Home
       </nav-link>
     </template>
   </navbar>

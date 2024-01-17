@@ -1,0 +1,7 @@
+.card-holder-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center;     /* Center vertically */
+    max-width: 400vh;       /* Minimum height of viewport */
+    padding-top: 50px;       /* Adjust this value as needed */
+}
