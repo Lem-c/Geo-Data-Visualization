@@ -30,6 +30,7 @@
     </div>
   </nav>
 </template>
+
 <script>
 import NavbarToggleButton from './NavbarToggleButton';
 let resizeTimeout;
@@ -46,7 +47,7 @@ function resizeThrottler(actualResizeHandler) {
 }
 
 export default {
-  name: 'nav-bar',
+  name: 'NavBar',
   props: {
     transparent: {
       type: Boolean,

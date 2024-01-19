@@ -6,12 +6,16 @@ import router from './router';
 
 import NowUiKit from './plugins/now-ui-kit';
 
+import ElementPlus from 'element-plus';
+
 // LeafFlet map css
 import 'leaflet/dist/leaflet.css';
 import './assets/css/globalStyle.css';
-import 'mapbox-gl/dist/mapbox-gl.css'
+import 'mapbox-gl/dist/mapbox-gl.css';
+import 'element-plus/dist/index.css';
 
 createApp(App)
   .use(router) // Use the router
   .use(NowUiKit) // Use web UI design pack
+  .use(ElementPlus)
   .mount('#app');
