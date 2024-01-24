@@ -180,7 +180,7 @@ export default {
 
 <style>
 #map {
-  height: 500px; /* Adjust as needed */
+  height: 600px; /* Adjust as needed */
   width: 100%;
 }
 </style>

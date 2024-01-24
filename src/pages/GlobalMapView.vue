@@ -4,7 +4,7 @@
 
       <div class="container">
 
-        <TempMap />
+        <TempMap></TempMap>
 
         <h6 class="category category-absolute">
           Designed by bootstrap.
@@ -19,7 +19,7 @@
 <script>
 // import LMap from 'leaflet'
 // import CardHolder from '@/components/Tools/CardHolder.vue';
-import TempMap from'@/components/Layout/TemMap.vue'
+import TempMap from "@/components/Layout/TemMap.vue"
 
 export default {
   name: 'global-map',
