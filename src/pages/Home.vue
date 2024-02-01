@@ -1,12 +1,11 @@
 <template>
   <div>
-    <div class="page-header clear-filter" filter-color="orange">
+    <div class="page-header clear-filter" filter-color="white">
       <header-image
         class="page-header-image"
         style="background-image:url('/img/niceView1.jpg')"
       >
       </header-image>
-
       <div class="container">
 
         <div class="content-center brand">
@@ -17,17 +16,10 @@
         <h6 class="category category-absolute">
           Designed by bootstrap.
         </h6>
-
       </div>  
     </div>
 
     <div class="main">
-      <div class="container">
-        <HeightMap></HeightMap>
-      </div>
-    </div>
-
-    <div class="section">
       <div class="container text-center">
         <div class="row justify-content-md-center">
           <div class="col-md-12 col-lg-8">
@@ -39,19 +31,38 @@
         </div>
       </div>
     </div>
+
+    <HeightMap></HeightMap>
+    <D3Chart 
+      :chartType="chartType"
+      :dataUrl="dataUrl"
+      :xColumn="ColumnNameForX"
+      :yColumn="ColumnNameForY"
+    />
+    
   </div>
 </template>
 
 <script>
-import HeaderImage from "@/components/Tools/HeaderImage.vue"
+import HeaderImage from "@/components/Tools/HeaderImage.vue";
 import HeightMap from "@/components/Layout/HeightMap.vue";
+import D3Chart from "@/components/Layout/Chart.vue"
 
 export default {
   name: 'Home-page',
   bodyClass: 'index-page',
   components: {
     HeaderImage,
-    HeightMap
+    HeightMap,
+    D3Chart
+  },
+  data(){
+    return{
+      chartType : 'bar',
+      dataUrl : '/data/CityData_WUP2018_top20.csv',
+      ColumnNameForX: 'CityCode',
+      ColumnNameForY: 'pop1970'
+    }
   }
 };
 </script>

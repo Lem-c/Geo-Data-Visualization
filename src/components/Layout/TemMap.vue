@@ -180,7 +180,11 @@ export default {
 
 <style>
 #map {
-  height: 600px; /* Adjust as needed */
-  width: 100%;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 </style>

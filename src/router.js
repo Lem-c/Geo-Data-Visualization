@@ -2,6 +2,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
 const MainHeader = import("./components/Layout/MainHeader.vue")
+const MainFooter = import("./components/Layout/MainFooter.vue")
 const Home = import("./pages/Home.vue")
 const GlobalMap = import('./pages/GlobalMapView.vue')
 
@@ -9,16 +10,16 @@ const routes = [
   {
     path: '/',
     name: 'index',
-    components: { default: Home, header: MainHeader},
+    components: { default: Home, header: MainHeader, footer: MainFooter},
     props: {
-      header: { colorOnScroll: 400 },
+      header: { colorOnScroll: 500 },
       footer: { backgroundColor: 'black' }
     }
   },
   {
     path: '/about',
     name: 'About', 
-    components: { default: GlobalMap, header: MainHeader },
+    components: { default: GlobalMap},
     props: {
       header: { colorOnScroll: 400 },
     }

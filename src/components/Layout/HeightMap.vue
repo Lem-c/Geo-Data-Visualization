@@ -1,32 +1,40 @@
 <template>
-    <div>
-      <div id='map'></div>
-      <div class='map-overlay'>
-        <div class='map-overlay-inner'>
-          <h2>England and Wales Employment and Population Density 2011</h2>
-          <table>
-            <tr>
-              <td>
-                <input type="radio" name="layers" id="layer1" value="Employment" checked @click="switchLayer('Emp')"><label>Jobs &nbsp; &nbsp;</label>
-                <input type="radio" name="layers" id="layer2" value="Residents" @click="switchLayer('Res')"><label>Residents</label>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <p class="cityfly">Zoom To:
-                  <a href="#" class="citylink" @click.prevent="zoomTo('Birmingham')">Birmingham</a> &nbsp;
-                  <a href="#" class="citylink" @click.prevent="zoomTo('Bristol')">Bristol</a> &nbsp;
-                  <a href="#" class="citylink" @click.prevent="zoomTo('Leeds')">Leeds</a> &nbsp;
-                  <a href="#" class="citylink" @click.prevent="zoomTo('London')">London</a> &nbsp;
-                  <a href="#" class="citylink" @click.prevent="zoomTo('Manchester')">Manchester</a> &nbsp;
-                  <a href="#" class="citylink" @click.prevent="zoomTo('Newcastle')">Newcastle</a>
-                </p>
-              </td>
-            </tr>
-          </table>
-          <p class="credit">Data: Census 2011, Office for Nat. Statistics. Cartography: <a href="http://citygeographics.org">citygeographics</a>.</p>
+    <div class="map-section">
+      <div class="main">
+        <div class="section section-images">
+          <div class="container">
+            <div id='map'></div>
+          </div>
+
+          <div class='map-overlay'>
+            <div class='map-overlay-inner'>
+              <h2>England and Wales Employment and Population Density 2011</h2>
+              <table>
+                <tr>
+                  <td>
+                    <input type="radio" name="layers" id="layer1" value="Employment" checked @click="switchLayer('Emp')"><label>Jobs &nbsp; &nbsp;</label>
+                    <input type="radio" name="layers" id="layer2" value="Residents" @click="switchLayer('Res')"><label>Residents</label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <p class="cityfly">Zoom To:
+                      <a href="#" class="citylink" @click.prevent="zoomTo('Birmingham')">Birmingham</a> &nbsp;
+                      <a href="#" class="citylink" @click.prevent="zoomTo('Bristol')">Bristol</a> &nbsp;
+                      <a href="#" class="citylink" @click.prevent="zoomTo('Leeds')">Leeds</a> &nbsp;
+                      <a href="#" class="citylink" @click.prevent="zoomTo('London')">London</a> &nbsp;
+                      <a href="#" class="citylink" @click.prevent="zoomTo('Manchester')">Manchester</a> &nbsp;
+                      <a href="#" class="citylink" @click.prevent="zoomTo('Newcastle')">Newcastle</a>
+                    </p>
+                  </td>
+                </tr>
+              </table>
+              <p class="credit">Data: Census 2011, Office for Nat. Statistics. Cartography: <a href="http://citygeographics.org">citygeographics</a>.</p>
+            </div>
+          </div>
         </div>
       </div>
+
     </div>
   </template>
   
@@ -36,7 +44,7 @@
   
   export default {
     name: 'HeightMap',
-  
+
     setup() {
       const map = ref(null);
   
@@ -164,7 +172,11 @@
   }
   </script>
 
-<style>
+<style scoped>
 @import "../../assets/css/legendStyle.css";
+
+.map-section{
+  background-color: #191970;
+}
 </style>
   
