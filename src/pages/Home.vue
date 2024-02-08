@@ -33,12 +33,6 @@
     </div>
 
     <HeightMap></HeightMap>
-    <D3Chart 
-      :chartType="chartType"
-      :dataUrl="dataUrl"
-      :xColumn="ColumnNameForX"
-      :yColumn="ColumnNameForY"
-    />
     
   </div>
 </template>
@@ -46,7 +40,6 @@
 <script>
 import HeaderImage from "@/components/Tools/HeaderImage.vue";
 import HeightMap from "@/components/Layout/HeightMap.vue";
-import D3Chart from "@/components/Layout/Chart.vue"
 
 export default {
   name: 'Home-page',
@@ -54,15 +47,6 @@ export default {
   components: {
     HeaderImage,
     HeightMap,
-    D3Chart
   },
-  data(){
-    return{
-      chartType : 'bar',
-      dataUrl : '/data/CityData_WUP2018_top20.csv',
-      ColumnNameForX: 'CityCode',
-      ColumnNameForY: 'pop1970'
-    }
-  }
 };
 </script>

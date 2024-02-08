@@ -23,6 +23,7 @@ export default {
     return{
       map: null, // Map instance
       markers: [],
+      addedMarkers: [],
 
       chartType : 'line',
       dataUrl : '/data/uk_climate/UK000000000.csv',
@@ -55,6 +56,15 @@ export default {
         zoom: 6 // starting zoom
       });
 
+      // Add zoom and rotation controls to the map.
+      this.map.addControl(new mapboxgl.NavigationControl());
+      
+      // Disable the drag to rotate functionality
+      this.map.dragRotate.disable();
+
+      // Disable rotation with touch gestures, but allow pinch to zoom
+      this.map.touchZoomRotate.disableRotation();
+
       this.map.on('load', () => {
         this.setMap(this.map);
       });
@@ -63,6 +73,11 @@ export default {
     setMap(map){
       this.addBoundaryLayer(map);
       this.addPopupContent("/data/uk_climate/UK000000000.csv");
+      this.addPopupContent("/data/uk_climate/UK000003005.csv");
+      this.addPopupContent("/data/uk_climate/UK000003026.csv");
+      this.addPopupContent("/data/uk_climate/UK000003162.csv");
+      this.addPopupContent("/data/uk_climate/UK000003302.csv");
+      this.addPopupContent("/data/uk_climate/UK000003377.csv");
     },
 
     addBoundaryLayer(map){
@@ -104,7 +119,8 @@ export default {
             coordinates: [parseFloat(d.LONGITUDE), parseFloat(d.LATITUDE)],
             popupContent: `<div class="popup-content"><h3>Line Chart</h3><p>Avg temperature</p><div id="${chartContainerId}"></div></div>`,
             id: d.DATE, // Feature id name
-            chartContainerId // Save this for later use
+            chartContainerId, // Save this for later use
+            dataUrl: path
           };
         });
 
@@ -114,13 +130,16 @@ export default {
     },
 
     addMarkers() {
-      var i = 0;
       this.markers.forEach(marker => {
-        if (i == 0 || !checkDuplicateMarkerCoord(this.markers, marker.coordinates)) {
+        if (this.addedMarkers.length == 0 ||
+          !checkDuplicateMarkerCoord(this.addedMarkers, marker.coordinates)) {
           // Create a placeholder div for the popup content
           const popupContentEl = document.createElement('div');
           popupContentEl.className = 'popup-content';
           popupContentEl.innerHTML = `<h3>Line Chart</h3><p>Avg temperature</p><div id="${marker.chartContainerId}"></div>`;
+
+          // Add this marker into added array
+          this.addedMarkers.push(marker)
 
           const popup = new mapboxgl.Popup()
             .setDOMContent(popupContentEl); // Use setDOMContent with the created element
@@ -131,18 +150,16 @@ export default {
             .addTo(this.map);
 
           popup.on('open', () => {
-            this.mountD3Chart(marker.chartContainerId);
+            this.mountD3Chart(marker.chartContainerId, marker.dataUrl);
           });
         }
-
-        i += 1;
       });
     },
 
-    mountD3Chart(containerId) {
+    mountD3Chart(containerId, dataUrl) {
       const props = {
         chartType: this.chartType,
-        dataUrl: this.dataUrl,
+        dataUrl: dataUrl,
         xColumn: this.ColumnNameForX,
         yColumn: this.ColumnNameForY
       };

@@ -1,13 +1,7 @@
 <template>
-    <div class="main">
-        <div class="section section-images">
-          <div class="container">
-            <div ref="chart"></div>
-          </div>
-        </div>
-    </div>
+    <div ref="chart"></div>
 </template>
-  
+
 <script>
 import * as d3 from 'd3';
 
@@ -57,9 +51,10 @@ export default {
             const data = await response.text();
 
             const parsedData = d3.csvParse(data, d => ({
-                x: d[this.xColumn], 
+                x: d[this.xColumn],
                 y: +d[this.yColumn] // convert to number
-            }));
+            })).filter(d => d.x != null && d.y != null && d.y !== 0);
+
             this.chartData = parsedData;
 
             // const contentType = response.headers.get('content-type');
@@ -78,6 +73,16 @@ export default {
             }
         },
 
+        formatData(){
+            if (!this.chartData) {
+                return;
+            }
+
+            this.chartData.forEach(d => {
+                d.x = new Date(d.x);
+            });
+        },
+
         createChart() {
             if (!this.chartData) {
                 return;
@@ -87,7 +92,8 @@ export default {
             const svg = d3.select(this.$refs.chart)
             .append('svg')
             .attr('width', '100%')
-            .attr('height', '100%');
+            .attr('height', '100%')
+            .attr('viewBox', `0 0 ${this.width} ${this.height}`);
 
             switch(this.chartType) {
                 case 'line':
@@ -103,18 +109,38 @@ export default {
         // Method to create x-axis
         createXAxis(svg, xScale, height) {
             const xAxis = d3.axisBottom(xScale);
-            svg.append('g')
+            const g = svg.append('g')
                 .attr('transform', `translate(0,${height})`) // Position at the bottom
                 .call(xAxis);
+
+            // Add an X-axis label
+            g.append("text")
+                .attr("class", "axis-label")
+                .attr("y", 35) // Adjust this value to position the label
+                .attr("x", this.width / 2)
+                .attr("text-anchor", "middle")
+                .text(this.xColumn);
         },
 
         // Method to create y-axis
         createYAxis(svg, yScale) {
             const yAxis = d3.axisLeft(yScale);
-            svg.append('g').call(yAxis);
+            const g = svg.append('g')
+                .call(yAxis);
+
+            // Add a Y-axis label
+            g.append("text")
+                .attr("class", "axis-label")
+                .attr("transform", "rotate(-90)")
+                .attr("y", -40) // Adjust this value to position the label
+                .attr("x", -this.height / 2)
+                .attr("text-anchor", "middle")
+                .text(this.yColumn);
         },
 
         createLineChart(svg) {
+            this.formatData();
+
             // Assuming chartData is an array of objects with x and y properties
             const xScale = d3.scaleLinear()
                 .domain(d3.extent(this.chartData, d => d.x)) // assuming x is the variable
@@ -140,6 +166,8 @@ export default {
         },
 
         createBarChart(svg) {
+            this.formatData();
+
             const xScale = d3.scaleBand()
                 .domain(this.chartData.map(d => d.x)) // assuming x is the category
                 .range([0, this.width])
