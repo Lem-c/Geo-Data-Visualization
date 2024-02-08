@@ -144,7 +144,18 @@ export default {
           const popup = new mapboxgl.Popup()
             .setDOMContent(popupContentEl); // Use setDOMContent with the created element
 
-          new mapboxgl.Marker()
+          // change marker icon
+          const customIconUrl = 'favicon.ico';
+
+          // Create a new HTML element for the custom marker
+          const el = document.createElement('div');
+          const img = document.createElement('img');
+          img.src = customIconUrl;
+          img.style.width = '25px'; // Set the size of the marker icon
+          img.style.height = '25px';
+          el.appendChild(img);
+
+          new mapboxgl.Marker(el)
             .setLngLat(marker.coordinates)
             .setPopup(popup)
             .addTo(this.map);
