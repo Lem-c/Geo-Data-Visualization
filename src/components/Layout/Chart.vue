@@ -35,8 +35,8 @@ export default {
     data() {
         return {
             chartData: null,
-            width: 640,  // Width of the SVG
-            height: 400, // Height of the SVG
+            width: 240,  // Width of the SVG
+            height: 150, // Height of the SVG
         };
     },
     watch: {
@@ -86,8 +86,8 @@ export default {
             // Generate the svg chart
             const svg = d3.select(this.$refs.chart)
             .append('svg')
-            .attr('width', this.width)
-            .attr('height', this.height);
+            .attr('width', '100%')
+            .attr('height', '100%');
 
             switch(this.chartType) {
                 case 'line':
@@ -118,11 +118,11 @@ export default {
             // Assuming chartData is an array of objects with x and y properties
             const xScale = d3.scaleLinear()
                 .domain(d3.extent(this.chartData, d => d.x)) // assuming x is the variable
-                .range([0, 600]);
+                .range([0, this.width]);
 
             const yScale = d3.scaleLinear()
                 .domain([0, d3.max(this.chartData, d => d.y)]) // assuming y is the variable
-                .range([400, 0]);
+                .range([this.height, 0]);
 
             const line = d3.line()
                 .x(d => xScale(d.x))
@@ -142,12 +142,12 @@ export default {
         createBarChart(svg) {
             const xScale = d3.scaleBand()
                 .domain(this.chartData.map(d => d.x)) // assuming x is the category
-                .range([0, 600])
+                .range([0, this.width])
                 .padding(0.2);
 
             const yScale = d3.scaleLinear()
                 .domain([0, d3.max(this.chartData, d => d.y)]) // assuming y is the variable
-                .range([400, 0]);
+                .range([this.height, 0]);
 
             svg.selectAll(".bar")
                 .data(this.chartData)

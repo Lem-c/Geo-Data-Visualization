@@ -178,7 +178,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 #map {
   width: 100vw;
   height: 100vh;

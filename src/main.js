@@ -8,7 +8,7 @@ import NowUiKit from './plugins/now-ui-kit';
 
 import ElementPlus from 'element-plus';
 
-// LeafFlet map css
+// third-party map css
 import 'leaflet/dist/leaflet.css';
 import './assets/css/globalStyle.css';
 import 'mapbox-gl/dist/mapbox-gl.css';
