@@ -28,12 +28,16 @@ export default {
       chartType : 'line',
       dataUrl : '/data/uk_climate/UK000000000.csv',
       ColumnNameForX: 'DATE',
-      ColumnNameForY: 'TAVG'
+      ColumnNameForY: 'TAVG',
+      chartWidth: 600,
+      chartHeight: 300,
     }
   },
 
   mounted() {
     this.initializeMap();
+    this.updateChartDimensions();
+    window.addEventListener('resize', this.updateChartDimensions);
   },
   
   beforeUnmount() {
@@ -72,6 +76,7 @@ export default {
 
     setMap(map){
       this.addBoundaryLayer(map);
+
       this.addPopupContent("/data/uk_climate/UK000000000.csv");
       this.addPopupContent("/data/uk_climate/UK000003005.csv");
       this.addPopupContent("/data/uk_climate/UK000003026.csv");
@@ -108,7 +113,6 @@ export default {
       d3.csv(path).then(data => {
         // data.forEach(d => {
         //   d.DATE = new Date(d.DATE);
-        //   d.TMAX = +d.TMAX;
         // });
 
         this.markers = data.map(d => {
@@ -141,7 +145,7 @@ export default {
           // Add this marker into added array
           this.addedMarkers.push(marker)
 
-          const popup = new mapboxgl.Popup()
+          const popup = new mapboxgl.Popup({ maxWidth: "1000px" })
             .setDOMContent(popupContentEl); // Use setDOMContent with the created element
 
           // change marker icon
@@ -172,7 +176,9 @@ export default {
         chartType: this.chartType,
         dataUrl: dataUrl,
         xColumn: this.ColumnNameForX,
-        yColumn: this.ColumnNameForY
+        yColumn: this.ColumnNameForY,
+        width: this.chartWidth,
+        height: this.chartHeight,
       };
       const container = document.getElementById(containerId);
       if (container) {
@@ -188,6 +194,12 @@ export default {
         app.mount(container);
       }
     },
+
+    updateChartDimensions() {
+      // Simple example, adjust as needed for your design
+      this.chartWidth = window.innerWidth/2;
+      this.chartHeight = window.innerHeight/4;
+    }
   }
 }
 
@@ -209,14 +221,11 @@ export default {
 }
 
 .popup-content {
-  width: auto;
-  max-width: 90vw;
-  min-width: 280px; /* Minimum width */
-  max-height: 80vh; /* Avoid too tall popups */
-  overflow-y: auto; /* Scroll inside if content is too long */
-  padding: 10px; /* Add some padding */
+  min-width: 400px; /* Minimum width */
+  padding: 15px; /* Add some padding */
   box-sizing: border-box; /* Include padding in width calculation */
-  background-color: white;
-  border-radius: 8px; /* Rounded corners */
+  background-color: rgb(34, 9, 39);
+  border-radius: 15px; /* Rounded corners */
 }
+
 </style>

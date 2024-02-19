@@ -1,5 +1,5 @@
 <template>
-
+<!-- This map is not used -->
 <div id='map'></div>
 
 <div class='map-overlay top'>
