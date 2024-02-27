@@ -94,7 +94,7 @@ export default {
             }
 
             // Response margin
-            const margin = {top: 20, right: 40, bottom: 40, left: 20},
+            const margin = {top: 20, right: -50, bottom: 40, left: 20},
                 width = this.width - margin.left - margin.right,
                 height = this.height - margin.top - margin.bottom;
             
@@ -174,10 +174,23 @@ export default {
             const yScale = d3.scaleLinear()
                 .domain([0, d3.max(this.chartData, d => d.y)])
                 .range([this.height, 0]);
+            svg.append("g")
+            .call(d3.axisLeft(yScale).ticks(6));
 
             const line = d3.line()
                 .x(d => xScale(d.x))
                 .y(d => yScale(d.y));
+
+            // Add the area
+            svg.append("path")
+                .datum(this.chartData)
+                .attr("fill", "#69b3a2")
+                .attr("fill-opacity", .3)
+                .attr("stroke", "none")
+                .attr("d", d3.area()
+                    .x(function(d) { return xScale(d.x) })
+                    .y0( this.height )
+                    .y1(function(d) { return yScale(d.y) }))
 
             svg.append("path")
                 .datum(this.chartData)
@@ -195,8 +208,27 @@ export default {
                 .duration(2000) // 2 seconds
                 .attr("stroke-dashoffset", 0);
 
+            // Add dots to the line
+            svg.selectAll("myCircles")
+                .data(this.chartData)
+                .enter()
+                .append("circle")
+                    .attr("fill", "red")
+                    .attr("stroke", "none")
+                    .attr("cx", function(d) { return xScale(d.x) })
+                    .attr("cy", function(d) { return yScale(d.y) })
+                    .attr("r", 3)
+
             this.createXAxis(svg, xScale, this.height);
-            this.createYAxis(svg, yScale);
+
+            // Add title (y-axis)
+            svg
+                .append("text")
+                .attr("text-anchor", "start")
+                .attr("y", -10)
+                .attr("x", -20)
+                .text("Avg Temperature")
+                .style("fill", '#008080')
         },
 
         createBarChart(svg) {

@@ -4,6 +4,22 @@
   <div id="map"></div>
 </div>
 
+<ToggleFloatButton :initialVisible="isFloatWindowVisible" @update:visible="updateVisibility" />
+
+<!-- Floating window overlay -->
+<div class="left-float-window" :class="{ hidden: !isFloatWindowVisible }">
+  <div class="title">Title</div>
+  <div class="text-list">
+    <div class="text-item">Txt</div>
+    <div class="text-item">Txt</div>
+    <div class="text-item">Txt</div>
+    <!-- Add more text items as needed -->
+  </div>
+  <div class="graph-container">
+    <!-- Placeholder for graph; you can use a library or custom SVG here -->
+  </div>
+</div>
+
 </template>
 
 <script>
@@ -12,6 +28,7 @@ import * as d3 from 'd3';
 import { createApp } from 'vue';
 
 import { checkDuplicateMarkerCoord } from '@/plugins/utils';
+import ToggleFloatButton from '@/components/Tools/ToggleFloatButton.vue';
 import D3Chart from "@/components/Layout/Chart.vue";
 
 let mountedApps = {};
@@ -19,11 +36,17 @@ let mountedApps = {};
 export default {
   name: 'IndMap',
 
+  components:{
+    ToggleFloatButton
+  },
+
   data(){
     return{
       map: null, // Map instance
       markers: [],
       addedMarkers: [],
+
+      isFloatWindowVisible: false,
 
       chartType : 'line',
       dataUrl : '/data/uk_climate/UK000000000.csv',
@@ -50,6 +73,10 @@ export default {
   },
 
   methods: {
+    updateVisibility(newValue) {
+      this.isFloatWindowVisible = newValue;
+    },
+
     initializeMap() {
       mapboxgl.accessToken = 'pk.eyJ1IjoieDBsZW0iLCJhIjoiY2xyaHA2ejVkMDFsejJrcG43MDA3bjBsaiJ9.Q5hsTi_sqF2QKkZjsII_Ag';
 
@@ -111,8 +138,14 @@ export default {
     addPopupContent(path){
       // Read in csv file
       d3.csv(path).then(data => {
+        // Data attributes calculation
+        const tempMap = data.map(d => +d.TAVG);
+        const emntMap = data.map(d=> +d.EMNT);
+        const maxTemp = d3.max(tempMap);
+        const minTemp = d3.min(emntMap);
         // data.forEach(d => {
-        //   d.DATE = new Date(d.DATE);
+        //   d.hisMax = maxTemp;
+        //   d.hisMin = minTemp;
         // });
 
         this.markers = data.map(d => {
@@ -121,7 +154,8 @@ export default {
 
           return {
             coordinates: [parseFloat(d.LONGITUDE), parseFloat(d.LATITUDE)],
-            popupContent: `<div class="popup-content"><h3>Line Chart</h3><p>Avg temperature</p><div id="${chartContainerId}"></div></div>`,
+            popupContent: `<div class="popup-content"><h3>Max Temperature: ${maxTemp} <br/>
+            Min Temperature: ${minTemp}</h3><p>Avg temperature line chart</p><div id="${chartContainerId}"></div></div>`,
             id: d.DATE, // Feature id name
             chartContainerId, // Save this for later use
             dataUrl: path
@@ -140,16 +174,16 @@ export default {
           // Create a placeholder div for the popup content
           const popupContentEl = document.createElement('div');
           popupContentEl.className = 'popup-content';
-          popupContentEl.innerHTML = `<h3>Line Chart</h3><p>Avg temperature</p><div id="${marker.chartContainerId}"></div>`;
+          popupContentEl.innerHTML = marker.popupContent;
 
           // Add this marker into added array
           this.addedMarkers.push(marker)
 
-          const popup = new mapboxgl.Popup({ maxWidth: "1000px" })
+          const popup = new mapboxgl.Popup({ maxWidth: "1920px" })
             .setDOMContent(popupContentEl); // Use setDOMContent with the created element
 
           // change marker icon
-          const customIconUrl = 'favicon.ico';
+          const customIconUrl = 'station.png';
 
           // Create a new HTML element for the custom marker
           const el = document.createElement('div');
@@ -226,6 +260,49 @@ export default {
   box-sizing: border-box; /* Include padding in width calculation */
   background-color: rgb(34, 9, 39);
   border-radius: 15px; /* Rounded corners */
+}
+
+/* Button */
+
+.left-float-window.hidden {
+  display: none;
+}
+
+/*Float window used css*/
+
+.left-float-window {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200px; /* Adjust width as necessary */
+  height: 100%;
+  background: white;
+  z-index: 10;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  padding: 10px;
+  font-size: 1.2em;
+  font-weight: bold;
+  border-bottom: 1px solid #ccc;
+}
+
+.text-list {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.text-item {
+  margin-bottom: 5px;
+}
+
+.graph-container {
+  padding: 10px;
+  border-top: 1px solid #ccc;
 }
 
 </style>
