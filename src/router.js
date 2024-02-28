@@ -1,5 +1,5 @@
 // router.js
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHashHistory  } from 'vue-router';
 
 const MainHeader = import("./components/Layout/MainHeader.vue")
 const MainFooter = import("./components/Layout/MainFooter.vue")
@@ -24,37 +24,10 @@ const routes = [
       header: { colorOnScroll: 400 },
     }
   },
-   
-//   {
-//     path: '/landing',
-//     name: 'landing',
-//     components: { default: Landing, header: MainNavbar, footer: MainFooter },
-//     props: {
-//       header: { colorOnScroll: 400 },
-//       footer: { backgroundColor: 'black' }
-//     }
-//   },
-//   {
-//     path: '/login',
-//     name: 'login',
-//     components: { default: Login, header: MainNavbar },
-//     props: {
-//       header: { colorOnScroll: 400 }
-//     }
-//   },
-//   {
-//     path: '/profile',
-//     name: 'profile',
-//     components: { default: Profile, header: MainNavbar, footer: MainFooter },
-//     props: {
-//       header: { colorOnScroll: 400 },
-//       footer: { backgroundColor: 'black' }
-//     }
-//   }
 ];
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes,
   scrollBehavior: (to) => {
     if (to.hash) {
