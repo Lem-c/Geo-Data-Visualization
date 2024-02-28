@@ -56,7 +56,7 @@ export default {
       dataUrl : '/data/uk_climate/UK000000000.csv',
       ColumnNameForX: 'DATE',
       ColumnNameForY: 'TAVG',
-      chartWidth: 600,
+      chartWidth: 800,
       chartHeight: 300,
 
       openWeatherAPI: '51a4229e709d79b1b3f625724a2a8a25',
@@ -66,8 +66,6 @@ export default {
 
   mounted() {
     this.initializeMap();
-    this.loadForecast();
-
     this.updateChartDimensions();
     window.addEventListener('resize', this.updateChartDimensions);
   },
@@ -93,7 +91,7 @@ export default {
         container: 'map', // container id
         style: 'mapbox://styles/mapbox/dark-v10', // style location
         center: [-1.83, 52.42], // starting position [lng, lat]
-        zoom: 8 // starting zoom
+        zoom: 6 // starting zoom
       });
 
       // Add zoom and rotation controls to the map.
@@ -113,19 +111,12 @@ export default {
     setMap(map){
       this.addBoundaryLayer(map);
 
-      const sunIconURL = '/img/station.png';
-
-      this.addPopupContent("/data/uk_climate/UK000000000.csv", sunIconURL);
-      this.addPopupContent("/data/uk_climate/UK000003005.csv", sunIconURL);
-      this.addPopupContent("/data/uk_climate/UK000003026.csv", sunIconURL);
-      this.addPopupContent("/data/uk_climate/UK000003162.csv", sunIconURL);
-      this.addPopupContent("/data/uk_climate/UK000003302.csv", sunIconURL);
-      this.addPopupContent("/data/uk_climate/UK000003377.csv", sunIconURL);
-      this.addPopupContent("/data/uk_climate/UK000003808.csv", sunIconURL);
-      this.addPopupContent("/data/uk_climate/UK000044841.csv", sunIconURL);
-      this.addPopupContent("/data/uk_climate/UK000047811.csv", sunIconURL);
-      this.addPopupContent("/data/uk_climate/UK000056225.csv", sunIconURL);
-      this.addPopupContent("/data/uk_climate/UK000070765.csv", sunIconURL);
+      this.addPopupContent("/data/uk_climate/UK000000000.csv");
+      this.addPopupContent("/data/uk_climate/UK000003005.csv");
+      this.addPopupContent("/data/uk_climate/UK000003026.csv");
+      this.addPopupContent("/data/uk_climate/UK000003162.csv");
+      this.addPopupContent("/data/uk_climate/UK000003302.csv");
+      this.addPopupContent("/data/uk_climate/UK000003377.csv");
     },
 
     addBoundaryLayer(map){
@@ -151,7 +142,7 @@ export default {
         .catch(error => console.log(error));
     },
 
-    addPopupContent(path, customIconUrl){
+    addPopupContent(path){
       // Read in csv file
       d3.csv(path).then(data => {
         // Data attributes calculation
@@ -179,11 +170,11 @@ export default {
         });
 
         // Add anchors and popup      
-        this.addMarkers(customIconUrl);
+        this.addMarkers();
       });
     },
 
-    addMarkers(customIconUrl) {
+    addMarkers() {
       this.markers.forEach(marker => {
         if (this.addedMarkers.length == 0 ||
           !checkDuplicateMarkerCoord(this.addedMarkers, marker.coordinates)) {
@@ -197,6 +188,9 @@ export default {
 
           const popup = new mapboxgl.Popup({ maxWidth: "1920px" })
             .setDOMContent(popupContentEl); // Use setDOMContent with the created element
+
+          // change marker icon
+          const customIconUrl = 'station.png';
 
           // Create a new HTML element for the custom marker
           const el = document.createElement('div');
@@ -213,6 +207,12 @@ export default {
 
           popup.on('open', () => {
             this.mountD3Chart(marker.chartContainerId, marker.dataUrl);
+          });
+
+          // Add forcast content when marker clicked
+          el.addEventListener('click', () => {
+            // Logic to handle marker click event
+            this.loadForecast(marker.coordinates[0], marker.coordinates[1]);
           });
         }
       });
@@ -243,190 +243,33 @@ export default {
     },
 
     updateChartDimensions() {
+      // Simple example, adjust as needed for your design
       this.chartWidth = window.innerWidth/2;
       this.chartHeight = window.innerHeight/4;
     },
 
-    loadForecast() {
-      const jsonContent =                       
-      {
-        "cod": "200",
-        "message": 0,
-        "cnt": 40,
-        "list": [
-          {
-            "dt": 1661871600,
-            "main": {
-              "temp": 296.76,
-              "feels_like": 296.98,
-              "temp_min": 296.76,
-              "temp_max": 297.87,
-              "pressure": 1015,
-              "sea_level": 1015,
-              "grnd_level": 933,
-              "humidity": 69,
-              "temp_kf": -1.11
-            },
-            "weather": [
-              {
-                "id": 500,
-                "main": "Rain",
-                "description": "light rain",
-                "icon": "10d"
-              }
-            ],
-            "clouds": {
-              "all": 100
-            },
-            "wind": {
-              "speed": 0.62,
-              "deg": 349,
-              "gust": 1.18
-            },
-            "visibility": 10000,
-            "pop": 0.32,
-            "rain": {
-              "3h": 0.26
-            },
-            "sys": {
-              "pod": "d"
-            },
-            "dt_txt": "2022-08-30 15:00:00"
-          },
-          {
-            "dt": 1661882400,
-            "main": {
-              "temp": 295.45,
-              "feels_like": 295.59,
-              "temp_min": 292.84,
-              "temp_max": 295.45,
-              "pressure": 1015,
-              "sea_level": 1015,
-              "grnd_level": 931,
-              "humidity": 71,
-              "temp_kf": 2.61
-            },
-            "weather": [
-              {
-                "id": 500,
-                "main": "Rain",
-                "description": "light rain",
-                "icon": "10n"
-              }
-            ],
-            "clouds": {
-              "all": 96
-            },
-            "wind": {
-              "speed": 1.97,
-              "deg": 157,
-              "gust": 3.39
-            },
-            "visibility": 10000,
-            "pop": 0.33,
-            "rain": {
-              "3h": 0.57
-            },
-            "sys": {
-              "pod": "n"
-            },
-            "dt_txt": "2022-08-30 18:00:00"
-          },
-          {
-            "dt": 1661893200,
-            "main": {
-              "temp": 292.46,
-              "feels_like": 292.54,
-              "temp_min": 290.31,
-              "temp_max": 292.46,
-              "pressure": 1015,
-              "sea_level": 1015,
-              "grnd_level": 931,
-              "humidity": 80,
-              "temp_kf": 2.15
-            },
-            "weather": [
-              {
-                "id": 500,
-                "main": "Rain",
-                "description": "light rain",
-                "icon": "10n"
-              }
-            ],
-            "clouds": {
-              "all": 68
-            },
-            "wind": {
-              "speed": 2.66,
-              "deg": 210,
-              "gust": 3.58
-            },
-            "visibility": 10000,
-            "pop": 0.7,
-            "rain": {
-              "3h": 0.49
-            },
-            "sys": {
-              "pod": "n"
-            },
-            "dt_txt": "2022-08-30 21:00:00"
-          },
-          {
-            "dt": 1662292800,
-            "main": {
-              "temp": 294.93,
-              "feels_like": 294.83,
-              "temp_min": 294.93,
-              "temp_max": 294.93,
-              "pressure": 1018,
-              "sea_level": 1018,
-              "grnd_level": 935,
-              "humidity": 64,
-              "temp_kf": 0
-            },
-            "weather": [
-              {
-                "id": 804,
-                "main": "Clouds",
-                "description": "overcast clouds",
-                "icon": "04d"
-              }
-            ],
-            "clouds": {
-              "all": 88
-            },
-            "wind": {
-              "speed": 1.14,
-              "deg": 17,
-              "gust": 1.57
-            },
-            "visibility": 10000,
-            "pop": 0,
-            "sys": {
-              "pod": "d"
-            },
-            "dt_txt": "2022-09-04 12:00:00"
+    loadForecast(lat, lon) {
+      const openWeatherURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${this.openWeatherAPI}`;
+
+      fetch(openWeatherURL)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
           }
-        ],
-        "city": {
-          "id": 3163858,
-          "name": "Zocca",
-          "coord": {
-            "lat": 44.34,
-            "lon": 10.99
-          },
-          "country": "IT",
-          "population": 4593,
-          "timezone": 7200,
-          "sunrise": 1661834187,
-          "sunset": 1661882248
-        }
-      };
-      this.forecast = jsonContent.list.map(item => ({
-        date: item.dt_txt,
-        main: item.main,
-        weather: item.weather,
-      }));
+          return response.json(); // Parse the JSON of the response
+        })
+        .then(data => {
+          // Save the fetched data
+          this.forecast = data.list.map(item => ({
+            date: item.dt_txt,
+            main: item.main,
+            weather: item.weather,
+          }));
+        })
+        .catch(error => {
+          console.error("Failed to fetch weather data:", error);
+          // Handle errors here
+        });
     },
   }
 }
@@ -468,9 +311,9 @@ export default {
   position: absolute;
   top: 0;
   left: 0;
-  width: 20%; /* Adjust width as necessary */
-  height: 50%;
-  background: #ADD8E6;
+  width: 15%; /* Adjust width as necessary */
+  height: 100%;
+  background: white;
   z-index: 10;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
   display: flex;

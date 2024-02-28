@@ -1,6 +1,6 @@
 <template>
     <button @click="toggle">
-      {{ isVisible ? 'Hide' : 'Show' }}
+      {{ isVisible ? 'Hide' : 'Live Wether' }}
     </button>
 </template>
   
