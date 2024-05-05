@@ -36,7 +36,7 @@ parseCSVtoJSON('../../data/tradeData/uk-2023.csv')
         };
       });
       
-      console.log(normalizedTop10Data);
+      // console.log(normalizedTop10Data);
 
       normalizedTop10Data.forEach(countryData => {
         const { countryName, NormalizedPrimaryValue, importVolume, longitude, latitude } = countryData;

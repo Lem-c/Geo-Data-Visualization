@@ -7,6 +7,7 @@ import DefaultFooter from "../../examples/footers/FooterDefault.vue";
 import Header from "../../examples/Header.vue";
 import FilledInfoCard from "../../examples/cards/infoCards/FilledInfoCard.vue";
 import TradeMap from "../../examples/TradeMap.vue";
+import TradeMap2 from "../../examples/TradeMap2.vue";
 
 //images
 import vueMkHeader from "@/assets/img/ui-bg.jpg";
@@ -14,6 +15,7 @@ import wavesWhite from "@/assets/img/waves-white.svg";
 
 //hooks
 const body = document.getElementsByTagName("body")[0];
+
 onMounted(() => {
   body.classList.add("presentation-page");
   body.classList.add("bg-gray-200");
@@ -111,6 +113,16 @@ onUnmounted(() => {
         <div class="d-flex justify-content-center p-5">
           <div class="w-90 ms-lg-5 text-center">
             <TradeMap/>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="d-flex justify-content-center p-5">
+          <div class="w-90 ms-lg-5 text-center">
+            <TradeMap2/>
           </div>
         </div>
       </div>
