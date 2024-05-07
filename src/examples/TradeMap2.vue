@@ -1,25 +1,49 @@
 <template>
-    <div>
-      <label for="destination">Select Trading Partner:</label>
-      <select id="destination" v-model="selectedPartnerISO" @change="drawMap">
-        <option v-for="partner in partners" :key="partner.iso" :value="partner.iso">
-          {{ partner.name }}
-        </option>
-      </select>
-  
-      <div id="projection_map" style="position: relative; width: 100%; height: 70VH;"></div>
+  <div>
+    <label for="destination">Select Trading Partner:</label>
+    <select id="destination" v-model="selectedPartnerISO" @change="drawMap">
+      <option v-for="partner in partners" :key="partner.iso" :value="partner.iso">
+        {{ partner.name }}
+      </option>
+    </select>
+
+    <div class="position-relative" style="width: 100%; height: 600px;">
+      <div
+        id="projection_map"
+        class="border bg-light p-2 rounded shadow"
+        style="position: relative; width: 100%; height: 100%; background: transparent;"
+      ></div>
+
+      <Efigure
+        class="position-absolute border p-2 rounded shadow"
+        :name="selectedPartner?.name ?? 'Total'"
+        style="top: 30px; right: 10px; width: 100%; height: 60vh; z-index: 15;"
+      />
+
+      <div
+        v-if="selectedPartner"
+        class="position-absolute top-0 start-0 bg-light p-2 border rounded shadow"
+        style="margin: 10px; z-index: 20;"
+      >
+        <h5 class="mb-1">{{ selectedPartner.name }}</h5>
+        <p class="mb-0"><strong>Primary Value:</strong> {{ selectedPartner.PValue }}</p>
+      </div>
     </div>
-  </template>
+  </div>
+</template>
   
-  <script setup>
+<script setup>
   import { onMounted, ref, watch } from 'vue';
   import Papa from 'papaparse';
-  
-  import {getCountryCoordinates} from "@/assets/js/worldCoord.js"
+  // import Datamap from 'datamaps';
+
+  import Efigure from '../components/EFigure.vue';
 
   const partners = ref([]);
   const selectedPartnerISO = ref('');
   const tradeData = ref([]);
+  const selectedPartner = ref(null);
+  const worldCities = ref([]);
   
   const fills = {
     defaultFill: "#D3D3D3",
@@ -29,24 +53,59 @@
   };
   
   const UK_COORDS = { latitude: 51.5074, longitude: -0.1278 };
-  
-  // Function to load partners from the trade data using PapaParse
-  const loadPartners = async () => {
-    const response = await fetch('../../data/tradeData/TradeData_5_2_2024_15_20_41.csv'); // Adjust path if necessary
+
+  // Load world cities coordinates from CSV
+  const loadWorldCities = async () => {
+    const response = await fetch('../../data/tradeData/worldcities.csv');
     const csvData = await response.text();
     Papa.parse(csvData, {
       header: true,
       complete: (result) => {
-        tradeData.value = result.data;
-        partners.value = [...new Set(tradeData.value.map(row => ({
-          iso: row.PartnerISO,
-          name: row.PartnerDesc
-        })))];
-        selectedPartnerISO.value = partners.value[1].iso;
+        worldCities.value = result.data;
+      }
+    });
+  };
+
+  // Find the coordinates for a country using its ISO code
+  const findCountryCoordinatesByISO = (iso) => {
+    const city = worldCities.value.find(row => row.iso3 === iso);
+    return city ? { latitude: parseFloat(city.lat), longitude: parseFloat(city.lng) } : null;
+  };
+
+  // Convert two-letter ISO code to three-letter ISO code
+  const convertISO2toISO3 = (iso2) => {
+    const city = worldCities.value.find(row => row.iso2 === iso2);
+    return city ? city.iso3 : null;
+  };
+  
+  // Function to load partners from the trade data using PapaParse
+  const loadPartners = async () => {
+    const response = await fetch('../../data/tradeData/uk_annual_exports.csv'); // Adjust path if necessary
+    const csvData = await response.text();
+    Papa.parse(csvData, {
+      header: true,
+      skipEmptyLines: true,
+      complete: (result) => {
+        tradeData.value = result.data.filter(row => row.CountryName && !row.CountryName.includes('Total'));
+
+        partners.value = tradeData.value
+          .map((row) => ({
+            iso: convertISO2toISO3(row.CountryCode) ,
+            name: row.CountryName,
+            PValue: row['2023'],
+          }))
+          .sort((a, b) => b.PValue - a.PValue) // Sorts in descending order
+          .slice(0, 10); // Takes only the top 10
+
+        selectedPartnerISO.value = partners.value[0]?.iso ?? '';
+        updateSelectedPartner();
       }
     });
   };
   
+  const updateSelectedPartner = () => {
+    selectedPartner.value = partners.value.find((partner) => partner.iso === selectedPartnerISO.value) || null;
+  };
   
   // Calculate the rotation between two coordinates
   const calculateRotation = (coords1, coords2) => {
@@ -57,7 +116,7 @@
   
   // Initialize and draw the map
   const initializeMap = () => {
-    const destination = getCountryCoordinates(selectedPartnerISO.value);
+    const destination = findCountryCoordinatesByISO(selectedPartnerISO.value);
     console.log(destination)
     const rotation = calculateRotation(UK_COORDS, destination);
   
@@ -73,7 +132,7 @@
         rotation: rotation
       },
       data: {
-        UK: { fillKey: 'UK' },
+        'GBR': { fillKey: 'UK' },
         [selectedPartnerISO.value]: { fillKey: 'Export' },
       },
     });
@@ -89,8 +148,8 @@
       ],
       {
         greatArc: true,
-        animationSpeed: 2000,
-        strokeWidth: 5,
+        animationSpeed: 1500,
+        strokeWidth: 4,
         arcSharpness: 1.4,
       }
     );
@@ -105,32 +164,42 @@
       mapElement.removeChild(mapElement.firstChild);
     }
     initializeMap();
+    updateSelectedPartner();
   };
   
   // Load partners and trade data on component mount
   onMounted(async () => {
+    await loadWorldCities();
     await loadPartners();
     drawMap();
   });
   
   watch(selectedPartnerISO, drawMap);
-  </script>
+</script>
   
-  <style scoped>
+<style scoped>
   #projection_map {
     height: 100%;
     width: 100%;
   }
-  
+
   label {
     display: inline-block;
     margin: 10px 0;
     font-weight: bold;
   }
-  
+
   select {
     padding: 5px;
     margin-bottom: 20px;
   }
-  </style>
+
+  h5 {
+    margin-bottom: 5px;
+  }
+
+  p {
+    font-size: 16px;
+  }
+</style>
   

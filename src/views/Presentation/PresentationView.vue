@@ -6,12 +6,12 @@ import NavbarMap from "../..//examples/navbars/NavbarMap.vue";
 import DefaultFooter from "../../examples/footers/FooterDefault.vue";
 import Header from "../../examples/Header.vue";
 import FilledInfoCard from "../../examples/cards/infoCards/FilledInfoCard.vue";
-import TradeMap from "../../examples/TradeMap.vue";
 import TradeMap2 from "../../examples/TradeMap2.vue";
 
 //images
 import vueMkHeader from "@/assets/img/ui-bg.jpg";
 import wavesWhite from "@/assets/img/waves-white.svg";
+import DataCard from "../../components/DataCard.vue";
 
 //hooks
 const body = document.getElementsByTagName("body")[0];
@@ -62,36 +62,7 @@ onUnmounted(() => {
   <div class="card card-body blur shadow-blur mx-3 mx-md-2 mt-n8">
 
     <div class="container">
-      <div class="row">
-        <div class="col-lg-4">
-          <FilledInfoCard
-            class="p-4"
-            :color="{ text: 'white', background: 'bg-gradient-success' }"
-            :icon="{ component: 'flag', color: 'white' }"
-            title="Getting Started"
-            description="Check the components of this project and the necessary files for building a page."
-            :action="{
-              route:
-                'https://www.creative-tim.com/learning-lab/vue/overview/material-kit/',
-              label: { text: 'Let\'s start', color: 'white' }
-            }"
-          />
-        </div>
-        <div class="col-lg-4">
-          <FilledInfoCard
-            class="px-lg-1 mt-lg-0 mt-4 p-4"
-            height="h-100"
-            :icon="{ component: 'precision_manufacturing', color: 'success' }"
-            title="Plugins"
-            description="Get inspiration and have an overview about the plugins that we
-                used to create the Material Kit."
-            :action="{
-              route:
-                'https://www.creative-tim.com/learning-lab/vue/input/material-kit/',
-              label: { text: 'Read more' }
-            }"
-          />
-        </div>
+      <div class="row justify-content-center">
         <div class="col-lg-4">
           <FilledInfoCard
             class="px-lg-1 mt-lg-0 mt-4 p-4"
@@ -112,7 +83,7 @@ onUnmounted(() => {
       <div class="row">
         <div class="d-flex justify-content-center p-5">
           <div class="w-90 ms-lg-5 text-center">
-            <TradeMap/>
+            <TradeMap2/>
           </div>
         </div>
       </div>
@@ -122,7 +93,7 @@ onUnmounted(() => {
       <div class="row">
         <div class="d-flex justify-content-center p-5">
           <div class="w-90 ms-lg-5 text-center">
-            <TradeMap2/>
+            <DataCard/>
           </div>
         </div>
       </div>
