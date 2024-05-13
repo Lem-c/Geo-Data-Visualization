@@ -3,7 +3,7 @@
     <label for="destination">Select Trading Partner:</label>
     <select id="destination" v-model="selectedPartnerISO" @change="drawMap">
       <option v-for="partner in partners" :key="partner.iso" :value="partner.iso">
-        {{ partner.name }}
+        {{ displayName(partner.name) }}
       </option>
     </select>
 
@@ -11,12 +11,13 @@
       <div
         id="projection_map"
         class="border bg-light p-2 rounded shadow"
-        style="position: relative; width: 100%; height: 100%; background: transparent;"
+        style="position: relative; width: 100%; height: 60vh; background: transparent;"
       ></div>
 
       <Efigure
         class="position-absolute border p-2 rounded shadow"
         :name="selectedPartner?.name ?? 'Total'"
+        :is-export-mode="isExportMode"
         style="top: 30px; right: 10px; width: 100%; height: 60vh; z-index: 15;"
       />
 
@@ -25,7 +26,7 @@
         class="position-absolute top-0 start-0 bg-light p-2 border rounded shadow"
         style="margin: 10px; z-index: 20;"
       >
-        <h5 class="mb-1">{{ selectedPartner.name }}</h5>
+        <h5 class="mb-1">{{ displayName(selectedPartner.name) }}</h5>
         <p class="mb-0"><strong>Primary Value:</strong> {{ selectedPartner.PValue }}</p>
       </div>
     </div>
@@ -33,7 +34,7 @@
 </template>
   
 <script setup>
-  import { onMounted, ref, watch } from 'vue';
+  import { onMounted, ref, watch, defineProps } from 'vue';
   import Papa from 'papaparse';
   // import Datamap from 'datamaps';
 
@@ -45,6 +46,15 @@
   const selectedPartner = ref(null);
   const worldCities = ref([]);
   
+  const props = defineProps({
+    isExportMode: Boolean
+  });
+
+  const displayName = (name) => {
+    const words = name.split(' ');
+    return words.slice(0, 2).join(' ');
+  }
+
   const fills = {
     defaultFill: "#D3D3D3",
     UK: "#ff5722",
@@ -80,7 +90,13 @@
   
   // Function to load partners from the trade data using PapaParse
   const loadPartners = async () => {
-    const response = await fetch('../../data/tradeData/uk_annual_exports.csv'); // Adjust path if necessary
+    const dataUrl = props.isExportMode ? 
+    '../../data/tradeData/uk_annual_exports.csv' : 
+    '../../data/tradeData/uk_annual_imports.csv';
+
+    console.log(dataUrl);
+
+    const response = await fetch(dataUrl);
     const csvData = await response.text();
     Papa.parse(csvData, {
       header: true,
@@ -167,6 +183,11 @@
     updateSelectedPartner();
   };
   
+  // Watch for changes in the export mode
+  watch(() => props.isExportMode, () => {
+    loadPartners();
+  });
+
   // Load partners and trade data on component mount
   onMounted(async () => {
     await loadWorldCities();

@@ -1,26 +1,39 @@
 <template>
 <div>
-    <h3 style="text-align: right; opacity: 0.5;">{{ name }} Data Chart</h3>
+    <h3 style="text-align: right; opacity: 0.5;">Goods {{ isExportMode ? 'exported' : 'imported' }} to {{ displayName }}</h3>
     <div ref="chartContainer" style="width: 100%; height: 600px;"></div>
 </div>
 </template>
 
 <script setup>
-import { ref, onMounted, watch, onBeforeUnmount } from 'vue';
+import { ref, onMounted, watch, onBeforeUnmount, computed } from 'vue';
 import * as echarts from 'echarts';
 
 const props = defineProps({
-name: {
-    type: String,
-    required: false,
-    default: '',
-},
+    name: {
+        type: String,
+        required: false,
+        default: '',
+    },
+    isExportMode: {
+        type: Boolean,
+        required: true
+    }
+});
+
+const displayName = computed(() => {
+  const words = props.name.split(' ');
+  return words.slice(0, 2).join(' ');
 });
 
 const chartContainer = ref(null);
 
 const fetchCSVData = async () => {
-    const response = await fetch('../../data/tradeData/uk_annual_exports.csv');
+    const dataUrl = props.isExportMode ? 
+    '../../data/tradeData/uk_annual_exports.csv' : 
+    '../../data/tradeData/uk_annual_imports.csv';
+
+    const response = await fetch(dataUrl);
     const csvText = await response.text();
 
     // Split the CSV by lines and then by commas
@@ -68,7 +81,7 @@ const drawChart = async () => {
 
     chart.setOption({
         title: {
-            text: 'Data Over Years',
+            text: props.isExportMode ? 'Goods exported value' : 'Goods imported value',
         },
         tooltip: {
             trigger: 'axis',
@@ -79,10 +92,16 @@ const drawChart = async () => {
         },
             yAxis: {
             type: 'value',
+            name: props.isExportMode ? 'Value of Exports' : 'Value of Imports'
         },
             series: seriesData,
     });
 };
+
+// Watch for changes in the export mode
+watch(() => props.isExportMode, () => {
+    fetchCSVData();
+});
 
 onBeforeUnmount(() => {
     if (echarts) {
