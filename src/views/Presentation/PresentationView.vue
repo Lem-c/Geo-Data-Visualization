@@ -40,6 +40,10 @@ onUnmounted(() => {
 </script>
 
 <template>
+
+  
+
+
   <div class="container-fluid position-sticky z-index-sticky top-0">
     <div class="row">
       <div class="col-12">
@@ -47,7 +51,6 @@ onUnmounted(() => {
       </div>
     </div>
   </div>
-  
   <Header>
     <div
       class="page-header min-vh-75"
@@ -94,6 +97,7 @@ onUnmounted(() => {
       </div>
     </div>
   </div>
+  
 
 
   <div class="card card-body blur shadow-blur mx-3 mx-md-2 mt-5">
@@ -102,12 +106,8 @@ onUnmounted(() => {
       <div class="row justify-content-center">
         <div class="col-lg-8">
           <h2 class="text-center mb-4">International</h2>
-          <p class="lead text-center">
-            This section leverages an interactive global map, derived from the Office for National Statistics (ONS) data. 
-            This feature visualizes the UK's trade relationships, displaying trends over the past two decades.
-            Can explore detailed trade data, including export and import values with top trading partners, by navigating through this engaging interface.
-            Also can reveal the data in transportation mods and different types of goods
-          </p>
+          <p class="lead text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <p class="lead text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
         </div>
       </div>
     </div>
@@ -165,8 +165,7 @@ onUnmounted(() => {
       <div class="row justify-content-center">
         <div class="col-lg-8">
           <h2 class="text-center mb-4">Subnational</h2>
-          <p class="lead text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-          <p class="lead text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <p class="lead text-center">Use the dashboard below to explore how international trade impacts each region of the UK differently.</p>
         </div>
       </div>
     </div>
@@ -174,6 +173,10 @@ onUnmounted(() => {
     <div class="container-fluid pt-7" id="region-section">
       <div class='tableauPlaceholder' id='viz1715280013344' style='position: relative; opacity: 1;'><noscript><a href='#'><img alt='Dashboard 3 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;uk&#47;uk_subnational_trade&#47;Dashboard3&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='uk_subnational_trade&#47;Dashboard3' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;uk&#47;uk_subnational_trade&#47;Dashboard3&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /><param name='filter' value='publish=yes' /></object></div>                <component :is="'script'">                    var divElement = document.getElementById('viz1715280013344');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.minWidth='500px';vizElement.style.maxWidth='2000px';vizElement.style.width='100%';vizElement.style.minHeight='1651px';vizElement.style.maxHeight='1751px';vizElement.style.height='1751px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </component>    
     </div>
+
+    <p></p>
+    <p></p>
+    <p class="lead text-center">You may have noticed that London stands out by a significant margin in nearly every metric. Continue to the next dashboard to get a better breakdown of London's economic spatial balance.</p>
 
   </div>
 
@@ -183,8 +186,7 @@ onUnmounted(() => {
       <div class="row justify-content-center">
         <div class="col-lg-8">
           <h2 class="text-center mb-4">Local (London)</h2>
-          <p class="lead text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-          <p class="lead text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <p class="lead text-center">Use the dashboard below to explore the economic impact and trends of London at a per-borough level.</p>
         </div>
       </div>
     </div>
@@ -236,7 +238,6 @@ onUnmounted(() => {
   <div class="card card-body blur shadow-blur mx-3 mx-md-2 mt-5">
     
     <h2 class="text-center mb-4">Datasets</h2>
-    <p class="lead text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
   
     <div class="container">
       <div class="row justify-content-center">
@@ -271,7 +272,7 @@ onUnmounted(() => {
             class="px-lg-1 mt-lg-0 mt-4 p-4"
             :icon="{ component: 'receipt_long', color: 'dark' }"
             title="London Data"
-            description="Exploring the sources of London data store."
+            description="Provided by the London data store, this dataset contains information on the economic health of London by borough."
             :action="{
               route:
                 'https://data.london.gov.uk/',
