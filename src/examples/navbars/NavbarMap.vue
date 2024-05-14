@@ -154,9 +154,9 @@ watch(
           </li>
 
           <li class="nav-item flex-grow-1 text-center">
-            <a href="#map-section" class="nav-link d-flex justify-content-center align-items-center">
+            <a href="#region-section" class="nav-link d-flex justify-content-center align-items-center">
               <i class="material-icons opacity-6 me-2 text-md">map</i>
-              SubRegion
+              Sub Region
             </a>
           </li>
 
