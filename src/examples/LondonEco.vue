@@ -11,7 +11,7 @@
     <div id="tooltip"></div>
     <div id="legend" class="legend"></div>
     <div id="selections">
-      <input type="radio" name="data-selection" id="GDP" value="GDP" checked><label for="GDP">GDP</label>
+      <input type="radio" name="data-selection" id="GDP" value="GDP" checked><label for="GDP">GDP Per Capita</label>
       <input type="radio" name="data-selection" id="income_median" value="income_median"><label for="income_median">Median Income</label>
       <input type="radio" name="data-selection" id="employment_rate" value="employment_rate"><label for="employment_rate">Employment Rate</label>
       <select id="yearSelector">
@@ -442,7 +442,7 @@ export default {
 
 #selections {
   position: absolute;
-  top: 10px;
+  top: 25%;
   right: 10px;
   color: black;
   background: #CDE8E5; /* Adds a semi-transparent dark background */

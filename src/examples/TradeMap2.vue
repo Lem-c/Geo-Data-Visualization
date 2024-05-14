@@ -133,7 +133,6 @@
   // Initialize and draw the map
   const initializeMap = () => {
     const destination = findCountryCoordinatesByISO(selectedPartnerISO.value);
-    console.log(destination)
     const rotation = calculateRotation(UK_COORDS, destination);
   
     const map = new Datamap({

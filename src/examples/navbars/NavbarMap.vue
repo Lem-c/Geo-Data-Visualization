@@ -154,6 +154,13 @@ function handleJumpAnimation(event) {
       >
         <ul class="navbar-nav navbar-nav-hover ms-auto d-flex justify-content-center w-100">
           <li class="nav-item flex-grow-1 text-center" @click="handleJumpAnimation">
+            <a href="#text-section" class="nav-link d-flex justify-content-center align-items-center">
+              <i class="material-icons opacity-6 me-2 text-md">home</i>
+              About
+            </a>
+          </li>
+
+          <li class="nav-item flex-grow-1 text-center" @click="handleJumpAnimation">
             <a href="#map-section" class="nav-link d-flex justify-content-center align-items-center">
               <i class="material-icons opacity-6 me-2 text-md">explore</i>
               Explore UK Trade in Goods

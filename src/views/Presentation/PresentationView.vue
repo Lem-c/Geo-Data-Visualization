@@ -17,6 +17,7 @@ import TableauDashboardPieExport from "../../components/TableauDashboardPieExpor
 import TableauDashboardPieImport from "../../components/TableauDashboardPieImport.vue"
 import LondonEco from "../../examples/LondonEco.vue";
 import LucyTableau from "../../components/LucyTableau.vue";
+import ClickSlider from "../../components/ClickSlider.vue";
 
 //hooks
 const body = document.getElementsByTagName("body")[0];
@@ -39,10 +40,6 @@ onUnmounted(() => {
 </script>
 
 <template>
-
-  
-
-
   <div class="container-fluid position-sticky z-index-sticky top-0">
     <div class="row">
       <div class="col-12">
@@ -78,26 +75,11 @@ onUnmounted(() => {
     </div>
   </Header>
 
-  <div class="card card-body blur shadow-blur mx-3 mx-md-2 mt-n8">
-
-    <div class="container-fluid">
-      <div class="row justify-content-center">
-        <div class="col-lg-8">
-          <p></p>
-          <h2 class="text-center mb-4">Economic Health: Navigating Sustainable Urban Growth</h2>
-          <p class="lead text-center">Economic health can have a profound impact on urban development, infrastructure, and the well-being of the population. Strong economic health ensures funding for public services such as health care, education, and transportation, which are essential components of urban life. In addition, economic strategy affects likelihood of private investment in urban areas, determining employment opportunities and influencing business patterns, all while affecting everything from housing and business development to cultural and recreational facilities. Understanding and planning for economic fluctuations is therefore essential for effectively managing sustainable urban growth.</p>
-          
-          <h2 class="text-center mb-4">Shaping the Future City</h2>
-          <p class="lead text-center">Economic insight is an integral part of the concept of the future city, which aims to be smarter, more sustainable, and more resilient. A city's ability to understand and adapt to economic changes and withstand economic shocks can help determine its long-term success and sustainability.</p>
-          
-          <h2 class="text-center mb-4">The UK: A Global Economic Engine</h2>
-          <p class="lead text-center">The UK is a key node in the global trading network, with the UK’s air, land, and sea ports being among the busiest in the world, facilitating a large number of imports and exports. The UK has a complex and diverse economic landscape, including global financial centres such as London, industrial areas in the Midlands, and emerging tech cities such as Manchester and Bristol. This diversity provides a wide range of data and scenarios for urban planning, from managing booming urban centers to revitalizing post-industrial towns.</p>
-          
-          <h2 class="text-center mb-4">Understanding Economic Recoveries</h2>
-          <p class="lead text-center">The COVID-19 pandemic has had an impact on the UK's economy, and London's performance in economic recovery stands out globally, demonstrating the resilience of global cities and providing a framework for economic recovery that can be used in the future.</p>
-        </div>
-      </div>
-    </div>
+  <div 
+  class="card card-body blur shadow-blur mx-3 mx-md-2 mt-n8"
+  id="text-section"
+  >
+    <ClickSlider />
   </div>
 
   <div class="card card-body blur shadow-blur mx-3 mx-md-2 mt-5">
@@ -120,8 +102,12 @@ onUnmounted(() => {
       <div class="row justify-content-center">
         <div class="col-lg-8">
           <h2 class="text-center mb-4">International</h2>
-          <p class="lead text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-          <p class="lead text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <p class="lead text-center">
+            This section leverages an interactive global map, derived from the Office for National Statistics (ONS) data. 
+            This feature visualizes the UK's trade relationships, displaying trends over the past two decades.
+            Can explore detailed trade data, including export and import values with top trading partners, by navigating through this engaging interface.
+            Also can reveal the data in transportation mods and different types of goods
+          </p>
         </div>
       </div>
     </div>
@@ -218,7 +204,7 @@ onUnmounted(() => {
           alignItems: 'center',            // Centers children horizontally
           justifyContent: 'center',        // Centers children vertically
           backgroundImage: `url(${wavesWhite})`,
-          height: '100vh',
+          height: '95vh',
           margin: '0 auto',                // Centers the block horizontally
           backgroundSize: 'cover',         // Ensures the background image covers the div
           backgroundPosition: 'center'     // Centers the background image
