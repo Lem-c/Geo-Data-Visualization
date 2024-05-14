@@ -5,7 +5,6 @@
       The map is indicating the 5 years change of 3 economic indicators: GDP per capita, income by workplace, and employment rate of residents aged 16-64. From the trend and the color of the map, we can preliminarily get the idea of whether the 2020 COVID lockdown has impacted the economic indicators and the economy gap between each borough.
       From the selection bar, you can select the element you want to show on the map, and for each element, there are year options to click and choose. Click on each borough to get more detailed Echart information.
       <br />
-      Note that: all the data are downloaded from the London data store: <a href="https://data.london.gov.uk/" target="_blank">https://data.london.gov.uk/</a>.
     </div>
     <div id="map"></div>
     <div ref="chartContainer" id="chart" :style="{ display: showChart ? 'block' : 'none' }"></div>
@@ -49,7 +48,7 @@ export default {
       this.map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/dark-v10',
-        center: [-0.1276, 51.4065],
+        center: [-0.1276, 51.425],
         zoom: 9.4,
         scrollZoom: false, // Disable zooming with scroll wheel
         doubleClickZoom: false, // Disable zooming with double click
@@ -107,7 +106,9 @@ export default {
 
             this.map.on('click', 'boroughs-fill', (e) => {
               this.showChart = true;
-              this.chart = echarts.init(this.$refs.chartContainer);
+              if(!this.chart){
+                this.chart = echarts.init(this.$refs.chartContainer);
+              }
               this.currentFeature = document.querySelector('input[name="data-selection"]:checked').value;
               this.updateChart(this.currentFeature, e);
               this.highlightBorough(e.features[0]);
@@ -224,8 +225,6 @@ export default {
       var employment_rate_2020 = this.safelyParseNumber(e.features[0].properties['2020_employment_rate']);
       var employment_rate_2021 = this.safelyParseNumber(e.features[0].properties['2021_employment_rate']);
       var employment_rate_2022 = this.safelyParseNumber(e.features[0].properties['2022_employment_rate']);
-
-      console.log("chart", !this.chart);
 
       if (selectedFeature === 'GDP'){
         this.chart.setOption({
@@ -410,15 +409,14 @@ export default {
 #chart {
   position: absolute;
   bottom: 0; /* Positioned 5% from the bottom of the map */
-  width: 40%; /* Width of the chart */
-  height: 30%; /* Height of the chart */
+  width: 650px; /* Width of the chart */
+  height: 400px; /* Height of the chart */
   background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
   z-index: 10; /* Ensure it's above the map */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 10px; /* Add padding to the chart container */
 }
 
 #tooltip {
@@ -446,15 +444,30 @@ export default {
   position: absolute;
   top: 10px;
   right: 10px;
-  color: white;
-  padding: 30px;
+  color: black;
+  background: #CDE8E5; /* Adds a semi-transparent dark background */
+  border: 2px solid white;
+  padding-top: 5px;
+  align-items: center;
   z-index: 1001;
-  transform: translate(0%, 0%);  /* Align the element correctly at the top right */
+  transform: translate(0%, 0%); /* Aligns the element correctly at the top right */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Adds a subtle shadow for depth */
+  border-radius: 10px;
+}
+
+#selections label {
+  color: black;
+  margin-right: 5px;
+  font-size: 18px;
 }
 
 #selections select {
   color: white; /* Sets the text color to white for input fields */
-  background: black; /* Optional: sets a dark background for better visibility */
+  background: black; /* Sets a dark background for better visibility */
+  border: 1px solid white; /* Adds a white border to input fields */
+  padding: 5px; /* Adds padding for better spacing */
+  border-radius: 4px; /* Adds rounded corners to input fields */
 }
+
 
 </style>

@@ -16,7 +16,6 @@ import TableauDashboardLineImportGoods from "../../components/TableauDashboardLi
 import TableauDashboardPieExport from "../../components/TableauDashboardPieExport.vue";
 import TableauDashboardPieImport from "../../components/TableauDashboardPieImport.vue"
 import LondonEco from "../../examples/LondonEco.vue";
-import { color } from "echarts";
 
 //hooks
 const body = document.getElementsByTagName("body")[0];
@@ -237,10 +236,10 @@ onUnmounted(() => {
             class="px-lg-1 mt-lg-0 mt-4 p-4"
             :icon="{ component: 'receipt_long', color: 'dark' }"
             title="London Data"
-            description="Exploring the sources of our inspiration and data reveals much."
+            description="Exploring the sources of London data store."
             :action="{
               route:
-                'https://comtradeplus.un.org/',
+                'https://data.london.gov.uk/',
               label: { text: 'Read more', color: 'info' }
             }"
           />
