@@ -16,6 +16,7 @@ import TableauDashboardLineImportGoods from "../../components/TableauDashboardLi
 import TableauDashboardPieExport from "../../components/TableauDashboardPieExport.vue";
 import TableauDashboardPieImport from "../../components/TableauDashboardPieImport.vue"
 import LondonEco from "../../examples/LondonEco.vue";
+import LucyTableau from "../../components/LucyTableau.vue";
 
 //hooks
 const body = document.getElementsByTagName("body")[0];
@@ -98,7 +99,6 @@ onUnmounted(() => {
         <!-- Right side column that holds Map, Line Chart, and Pie Chart -->
         <div class="col-md-9">
           <div class="row d-flex justify-content-center">
-            <!-- Map taking the larger portion at the top right -->
             <div class="col-12 mt-7" style="height: 50%;">
               <div class="position-relative">
                 <TradeMap2 :is-export-mode="isExportMode" />
@@ -158,6 +158,7 @@ onUnmounted(() => {
     </div>
 
   </div>
+
   <div class="card card-body blur shadow-blur mx-3 mx-md-2 mt-5">
 
     <div class="container-fluid">
@@ -194,6 +195,22 @@ onUnmounted(() => {
       >
         <span class="mask bg-gradient-dark"></span>
         <LondonEco />
+      </div>
+    </div>
+
+    <div class="container-fluid" id="london-data-section">
+      <div class="row justify-content-center">
+        <!-- Right side column that holds Map, Line Chart, and Pie Chart -->
+        <div class="col-md-9">
+          <div class="row d-flex justify-content-center">
+            <!-- Map taking the larger portion at the top right -->
+            <div class="col-12 mt-7">
+              <div class="position-relative">
+                <LucyTableau />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

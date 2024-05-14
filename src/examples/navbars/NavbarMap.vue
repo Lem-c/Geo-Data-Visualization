@@ -5,7 +5,6 @@ import { useWindowsWidth } from "../../assets/js/useWindowsWidth";
 
 // images
 import ArrDark from "@/assets/img/down-arrow-dark.svg";
-// import downArrow from "@/assets/img/down-arrow.svg";
 import DownArrWhite from "@/assets/img/down-arrow-white.svg";
 
 const props = defineProps({
@@ -42,7 +41,7 @@ const props = defineProps({
   }
 });
 
-// set arrow  color
+// set arrow color
 function getArrowColor() {
   if (props.transparent && textDark.value) {
     return ArrDark;
@@ -68,7 +67,6 @@ const getTextColor = () => {
 };
 
 // set nav color on mobile && desktop
-
 let textDark = ref(props.darkText);
 const { type } = useWindowsWidth();
 
@@ -88,10 +86,19 @@ watch(
     }
   }
 );
+
+// function to handle the jump animation
+function handleJumpAnimation(event) {
+  const element = event.currentTarget;
+  element.classList.add('jump');
+  setTimeout(() => {
+    element.classList.remove('jump');
+  }, 500);
+}
 </script>
 
 <template>
-<nav
+  <nav
     class="navbar navbar-expand-lg top-0"
     :class="{
       'z-index-3 w-100 shadow-none navbar-transparent position-absolute my-3':
@@ -99,7 +106,7 @@ watch(
       'my-3 blur border-radius-lg z-index-3 py-2 shadow py-2 start-0 end-0 mx-4 position-absolute mt-4':
         props.sticky,
       'navbar-light bg-white py-3': props.light,
-      ' navbar-dark bg-gradient-dark z-index-3 py-3': props.dark
+      'navbar-dark bg-gradient-dark z-index-3 py-3': props.dark
     }"
   >
     <div
@@ -111,34 +118,34 @@ watch(
     >
 
       <RouterLink
-          class="navbar-brand d-none d-md-block"
-          :class="[
+        class="navbar-brand d-none d-md-block"
+        :class="[
           (props.transparent && textDark.value) || !props.transparent
-              ? 'text-dark font-weight-bolder ms-sm-3'
-              : 'text-white font-weight-bolder ms-sm-3'
-          ]"
-          :to="{ name: 'presentation' }"
-          rel="tooltip"
-          title="Designed and Coded by Creative Tim"
-          data-placement="bottom"
+            ? 'text-dark font-weight-bolder ms-sm-3'
+            : 'text-white font-weight-bolder ms-sm-3'
+        ]"
+        :to="{ name: 'presentation' }"
+        rel="tooltip"
+        title="Designed and Coded by Creative Tim"
+        data-placement="bottom"
       >
-          Home
+        Home
       </RouterLink>
 
       <button
-          class="navbar-toggler shadow-none ms-2"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navigation"
-          aria-controls="navigation"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
+        class="navbar-toggler shadow-none ms-2"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navigation"
+        aria-controls="navigation"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
       >
-          <span class="navbar-toggler-icon mt-2">
+        <span class="navbar-toggler-icon mt-2">
           <span class="navbar-toggler-bar bar1"></span>
           <span class="navbar-toggler-bar bar2"></span>
           <span class="navbar-toggler-bar bar3"></span>
-          </span>
+        </span>
       </button>
 
       <div
@@ -146,24 +153,31 @@ watch(
         id="navigation"
       >
         <ul class="navbar-nav navbar-nav-hover ms-auto d-flex justify-content-center w-100">
-          <li class="nav-item flex-grow-1 text-center">
+          <li class="nav-item flex-grow-1 text-center" @click="handleJumpAnimation">
             <a href="#map-section" class="nav-link d-flex justify-content-center align-items-center">
-              <i class="material-icons opacity-6 me-2 text-md">map</i>
+              <i class="material-icons opacity-6 me-2 text-md">explore</i>
               Explore UK Trade in Goods
             </a>
           </li>
 
-          <li class="nav-item flex-grow-1 text-center">
+          <li class="nav-item flex-grow-1 text-center" @click="handleJumpAnimation">
             <a href="#region-section" class="nav-link d-flex justify-content-center align-items-center">
-              <i class="material-icons opacity-6 me-2 text-md">map</i>
+              <i class="material-icons opacity-6 me-2 text-md">public</i>
               Sub Region
             </a>
           </li>
 
-          <li class="nav-item flex-grow-1 text-center">
+          <li class="nav-item flex-grow-1 text-center" @click="handleJumpAnimation">
             <a href="#london-section" class="nav-link d-flex justify-content-center align-items-center">
               <i class="material-icons opacity-6 me-2 text-md">location_city</i>
               What Happened in London
+            </a>
+          </li>
+
+          <li class="nav-item flex-grow-1 text-center" @click="handleJumpAnimation">
+            <a href="#london-data-section" class="nav-link d-flex justify-content-center align-items-center">
+              <i class="material-icons opacity-6 me-2 text-md">analytics</i>
+              London In details
             </a>
           </li>
 
@@ -200,6 +214,23 @@ watch(
         </ul>
       </div>
     </div>
-</nav>
-
+  </nav>
 </template>
+
+<style scoped>
+@keyframes jump {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.jump {
+  animation: jump 0.5s;
+}
+</style>
