@@ -1,6 +1,6 @@
 <template>
 <div>
-    <h3 style="text-align: right; opacity: 0.5;">Goods {{ isExportMode ? 'exported' : 'imported' }} to {{ displayName }}</h3>
+    <h3 style="text-align: right; opacity: 0.5;">Goods {{ isExportMode ? 'Exported to' : 'Imported from' }} {{ displayName }}</h3>
     <div ref="chartContainer" style="width: 100%; height: 600px;"></div>
 </div>
 </template>
@@ -80,9 +80,9 @@ const drawChart = async () => {
     const chart = echarts.init(chartContainer.value);
 
     chart.setOption({
-        title: {
-            text: props.isExportMode ? 'Goods exported value' : 'Goods imported value',
-        },
+        // title: {
+        //     text: props.isExportMode ? 'Goods exported value' : 'Goods imported value',
+        // },
         tooltip: {
             trigger: 'axis',
         },
@@ -92,7 +92,7 @@ const drawChart = async () => {
         },
             yAxis: {
             type: 'value',
-            name: props.isExportMode ? 'Value of Exports' : 'Value of Imports'
+            name: props.isExportMode ? 'Value of Exports (£m)' : 'Value of Imports (£m)'
         },
             series: seriesData,
     });

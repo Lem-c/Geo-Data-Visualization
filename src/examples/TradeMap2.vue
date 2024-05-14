@@ -1,24 +1,24 @@
 <template>
   <div>
-    <label for="destination">Select Trading Partner:</label>
+    <label for="destination">Select among the top 10 trading partners ></label>
     <select id="destination" v-model="selectedPartnerISO" @change="drawMap">
       <option v-for="partner in partners" :key="partner.iso" :value="partner.iso">
         {{ displayName(partner.name) }}
       </option>
     </select>
 
-    <div class="position-relative" style="width: 100%; height: 600px;">
+    <div class="position-relative" style="width: 100%; height: 700px;">
       <div
         id="projection_map"
         class="border bg-light p-2 rounded shadow"
-        style="position: relative; width: 100%; height: 60vh; background: transparent;"
+        style="position: relative; width: 100%; height: 100%; background: transparent;"
       ></div>
 
       <Efigure
         class="position-absolute border p-2 rounded shadow"
         :name="selectedPartner?.name ?? 'Total'"
         :is-export-mode="isExportMode"
-        style="top: 30px; right: 10px; width: 100%; height: 60vh; z-index: 15;"
+        style="top: 30px; right: 10px; width: 100%; height: 100%; z-index: 15;"
       />
 
       <div
@@ -26,8 +26,8 @@
         class="position-absolute top-0 start-0 bg-light p-2 border rounded shadow"
         style="margin: 10px; z-index: 20;"
       >
-        <h5 class="mb-1">{{ displayName(selectedPartner.name) }}</h5>
-        <p class="mb-0"><strong>Primary Value:</strong> {{ selectedPartner.PValue }}</p>
+        <h5 class="mb-1">{{ displayName(selectedPartner.name) }} (2023)</h5>
+        <p class="mb-0"><strong>Volume of Trade :</strong> £{{ selectedPartner.PValue }}m</p>
       </div>
     </div>
   </div>

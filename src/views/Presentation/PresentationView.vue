@@ -21,6 +21,11 @@ import LondonEco from "../../examples/LondonEco.vue";
 const body = document.getElementsByTagName("body")[0];
 
 const isExportMode = ref(true); 
+const chartsVisible = ref(false);
+
+const toggleCharts = () => {
+  chartsVisible.value = !chartsVisible.value;
+};
 
 onMounted(() => {
   body.classList.add("presentation-page");
@@ -69,25 +74,31 @@ onUnmounted(() => {
 
     <div class="container-fluid" id="map-section">
       <div class="row justify-content-center">
-
         <!-- Right side column that holds Map, Line Chart, and Pie Chart -->
         <div class="col-md-9">
           <div class="row d-flex justify-content-center">
-
             <!-- Map taking the larger portion at the top right -->
-            <div class="col-12  mt-7" style="height: 50%;">
+            <div class="col-12 mt-7" style="height: 50%;">
               <div class="position-relative">
                 <TradeMap2 :is-export-mode="isExportMode" />
-                <button @click="isExportMode = !isExportMode"
-                        class="btn btn-primary position-absolute top-0 end-0 m-3">
+                <button @click="isExportMode = !isExportMode" class="btn btn-primary position-absolute top-0 end-0 m-3">
                   {{ isExportMode ? 'Switch to Import' : 'Switch to Export' }}
+                </button>
+              </div>
+            </div>
+
+            <!-- Button to toggle charts visibility -->
+            <div class="col-12 mt-5">
+              <div class="row d-flex justify-content-center">
+                <button class="btn btn-secondary" @click="toggleCharts">
+                  {{ chartsVisible ? 'Hide Charts' : 'Reveal Trade Data in Transportation Mods and Goods' }}
                 </button>
               </div>
             </div>
 
             <!-- Row for Line Chart and Pie Chart on the same line -->
             <div class="col-12 mt-7">
-              <div class="row d-flex justify-content-center">
+              <div class="row collapse" :class="{ show: chartsVisible }" id="chartsCollapse">
                 <!-- Line Chart -->
                 <div class="col-md-6 d-flex align-items-center justify-content-center" style="height: 50%;">
                   <div style="width: 100%;">
@@ -109,19 +120,21 @@ onUnmounted(() => {
       </div>
     </div>
 
-    <div class="container-fluid pt-7" id="region-section">
+    <div class="mb-3" id="region-section"></div>
+
+    <div class="container-fluid">
       <div class='tableauPlaceholder' id='viz1715280013344' style='position: relative'><noscript><a href='#'><img alt='Dashboard 3 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;uk&#47;uk_subnational_trade&#47;Dashboard3&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='uk_subnational_trade&#47;Dashboard3' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;uk&#47;uk_subnational_trade&#47;Dashboard3&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /><param name='filter' value='publish=yes' /></object></div>                <component :is="'script'">                    var divElement = document.getElementById('viz1715280013344');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.minWidth='500px';vizElement.style.maxWidth='2000px';vizElement.style.width='100%';vizElement.style.minHeight='1651px';vizElement.style.maxHeight='1751px';vizElement.style.height='1751px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </component>    
     </div>
 
     <div
       class="container-fluid mt-sm-5 border-radius-xl"
+      id="london-section"
       :style="{
         background: 'linear-gradient(195deg, rgb(66, 66, 74), rgb(25, 25, 25))'
       }"
     >
       <div
-        class="page-header py-6 py-md-5 my-sm-3 mb-3 border-radius-xl"
-        id="london-section"
+        class="page-header py-6 py-md-5 my-sm-3 border-radius-xl"
         :style="{
           display: 'flex',                 // Added for flexbox layout
           flexDirection: 'column',         // Directs children to align vertically
@@ -140,7 +153,7 @@ onUnmounted(() => {
       </div>
     </div>
 
-    <div class="container">
+    <div class="container mt-5">
       <div class="row justify-content-center">
         <div class="col-lg-4">
           <FilledInfoCard
@@ -163,6 +176,6 @@ onUnmounted(() => {
 
 <style>
 .bg-black {
-  background-color: #C6A969;
+  background-color: #EEF7FF;
 }
 </style>

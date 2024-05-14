@@ -8,7 +8,7 @@
       Note that: all the data are downloaded from the London data store: <a href="https://data.london.gov.uk/" target="_blank">https://data.london.gov.uk/</a>.
     </div>
     <div id="map"></div>
-    <div ref="chartContainer" id="chart"></div>
+    <div ref="chartContainer" id="chart" :style="{ display: showChart ? 'block' : 'none' }"></div>
     <div id="tooltip"></div>
     <div id="legend" class="legend"></div>
     <div id="selections">
@@ -37,6 +37,7 @@ export default {
       map: null,
       chart: null,
       currentFeature: null,
+      showChart: false,
     };
   },
   mounted() {
@@ -54,8 +55,6 @@ export default {
         doubleClickZoom: false, // Disable zooming with double click
         touchZoomRotate: false // Disable zooming and rotating with touch gestures
       });
-
-      this.chart = echarts.init(this.$refs.chartContainer);
 
       this.map.on('load', () => {
         fetch('../../data/tradeData/london_data.json')
@@ -107,8 +106,11 @@ export default {
             this.updateMapVisualization();
 
             this.map.on('click', 'boroughs-fill', (e) => {
+              this.showChart = true;
+              this.chart = echarts.init(this.$refs.chartContainer);
               this.currentFeature = document.querySelector('input[name="data-selection"]:checked').value;
               this.updateChart(this.currentFeature, e);
+              this.highlightBorough(e.features[0]);
             });
 
             this.map.on('mousemove', 'boroughs-fill', (e) => {
@@ -151,9 +153,6 @@ export default {
           });
       });
     },
-    updateChartVisibility() {
-      document.getElementById('chart').style.display = this.currentFeature ? 'block' : 'none';
-    },
     updateMapVisualization() {
       const selectedYear = document.getElementById('yearSelector').value;
       const dataType = document.querySelector('input[name="data-selection"]:checked').value;
@@ -174,7 +173,39 @@ export default {
         this.map.setPaintProperty('boroughs-fill', 'fill-color', colorExpression);
       }
     },
+    highlightBorough(feature) {
+      if (this.map.getLayer('boroughs-highlight')) {
+        this.map.removeLayer('boroughs-highlight');
+        this.map.removeSource('boroughs-highlight');
+      }
+
+      this.map.addSource('boroughs-highlight', {
+        type: 'geojson',
+        data: {
+          type: 'FeatureCollection',
+          features: [feature],
+        },
+      });
+
+      this.map.addLayer({
+        id: 'boroughs-highlight',
+        type: 'fill',
+        source: 'boroughs-highlight',
+        layout: {},
+        paint: {
+          'fill-color': '#007F73',
+          'fill-opacity': 0.55,
+        },
+      });
+    },
     updateChart(selectedFeature, e) {
+      if (!this.chart) {
+        const chartContainer = this.$refs.chartContainer;
+        if (chartContainer) {
+          this.chart = echarts.init(chartContainer);
+        }
+      }
+
       const boroughName = e.features[0].properties.NAME_3;
       var GDP_2018 = this.safelyParseNumber(e.features[0].properties['2018_GDP']);
       var GDP_2019 = this.safelyParseNumber(e.features[0].properties['2019_GDP']);
@@ -193,8 +224,9 @@ export default {
       var employment_rate_2020 = this.safelyParseNumber(e.features[0].properties['2020_employment_rate']);
       var employment_rate_2021 = this.safelyParseNumber(e.features[0].properties['2021_employment_rate']);
       var employment_rate_2022 = this.safelyParseNumber(e.features[0].properties['2022_employment_rate']);
-      
-      
+
+      console.log("chart", !this.chart);
+
       if (selectedFeature === 'GDP'){
         this.chart.setOption({
           title: {
@@ -296,8 +328,6 @@ export default {
             }]
           });
       }
-
-      this.updateChartVisibility();
     },
     updateLegend(dataType, dataProperty) {
       const legend = document.getElementById('legend');
@@ -316,7 +346,7 @@ export default {
       }
 
       // Clear existing content
-      legend.innerHTML = `<strong>${dataProperty} Legend</strong><div style="padding-top: 5px;"></div>`;
+      legend.innerHTML = `<strong>${this.formatString(dataProperty)}</strong><div style="padding-top: 5px;"></div>`;
       const legendContainer = legend.lastElementChild;
 
       colors.forEach((color, index) => {
@@ -343,6 +373,9 @@ export default {
             // Return the value unchanged if it's not a numeric string
             return value;
         }
+    },
+    formatString(str) {
+      return str.replace(/_/g, ' ').toUpperCase();
     }
   },
 };
@@ -352,42 +385,32 @@ export default {
 .content-container {
   position: relative;
   height: 100vh; /* Set to the height of the viewport */
-  width: 90%; /* Full width */
+  width: 100%; /* Full width */
 }
 
 #title { 
-  top: 0; /* Position at the very top of the page */
-  width: 100%; /* Full width */
+  color: white; /* Change the title color to white */
   text-align: center;
-  color: bisque;
-  padding: 10px; 
   font-size: 55px;
   z-index: 1001; /* Above all other content */
 }
 
 #description {
-  position: absolute;
-  left: 10px;
-  width: 200px;
-  padding: 10px;
-  background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white background */
-  color: black;
+  margin-bottom: 20px; /* Adds some space below the title */
+  color: white; /* Ensure the text color is white for readability */
   z-index: 1000;
-  font-size: 16px;
-  pointer-events: none; /* Ensures interaction with map is possible */
+  font-size: 20px;
 }
 
 #map {
-  height: 90%; /* Full container height */
+  height: 100%; /* Full container height */
   width: 100%; /* Full container width */
 }
 
 #chart {
   position: absolute;
-  bottom: 5%; /* Positioned 20% from the bottom of the map */
-  left: 50%; /* Center horizontally */
-  transform: translateX(-50%); /* Center horizontally */
-  width: 60%; /* Width of the chart */
+  bottom: 0; /* Positioned 5% from the bottom of the map */
+  width: 40%; /* Width of the chart */
   height: 30%; /* Height of the chart */
   background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
   z-index: 10; /* Ensure it's above the map */
@@ -395,6 +418,7 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 10px; /* Add padding to the chart container */
 }
 
 #tooltip {

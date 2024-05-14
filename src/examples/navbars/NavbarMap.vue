@@ -149,7 +149,7 @@ watch(
           <li class="nav-item flex-grow-1 text-center">
             <a href="#map-section" class="nav-link d-flex justify-content-center align-items-center">
               <i class="material-icons opacity-6 me-2 text-md">map</i>
-              Global View
+              Explore UK Trade in Goods
             </a>
           </li>
 

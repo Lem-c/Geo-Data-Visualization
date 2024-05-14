@@ -49,13 +49,13 @@ export default {
     },
     adjustVizSize(divElement, vizElement) {
       if (divElement.offsetWidth > 800) {
-        vizElement.style.minWidth = '420px';
-        vizElement.style.maxWidth = '600px';
+        vizElement.style.minWidth = '550px';
+        vizElement.style.maxWidth = '650px';
         vizElement.style.width = '100%';
         vizElement.style.height = '577px';
       } else if (divElement.offsetWidth > 500) {
         vizElement.style.minWidth = '420px';
-        vizElement.style.maxWidth = '600px';
+        vizElement.style.maxWidth = '650px';
         vizElement.style.width = '100%';
         vizElement.style.height = '577px';
       } else {
