@@ -106,8 +106,7 @@ onUnmounted(() => {
       <div class="row justify-content-center">
         <div class="col-lg-8">
           <h2 class="text-center mb-4">International</h2>
-          <p class="lead text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-          <p class="lead text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <p class="lead text-center">This section leverages an interactive global map, sourced from the Office for National Statistics (ONS) data. This feature visualizes the UK's trade relationships, showcasing trends over the past two decades. Users can explore detailed trade data, including export and import values with top trading partners, through this engaging interface.</p>
         </div>
       </div>
     </div>
