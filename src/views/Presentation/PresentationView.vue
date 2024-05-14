@@ -40,9 +40,6 @@ onUnmounted(() => {
 
 <template>
 
-  
-
-
   <div class="container-fluid position-sticky z-index-sticky top-0">
     <div class="row">
       <div class="col-12">
@@ -50,7 +47,6 @@ onUnmounted(() => {
       </div>
     </div>
   </div>
-  
   <Header>
     <div
       class="page-header min-vh-75"
@@ -112,6 +108,7 @@ onUnmounted(() => {
       </div>
     </div>
   </div>
+  
 
 
   <div class="card card-body blur shadow-blur mx-3 mx-md-2 mt-5">
@@ -250,7 +247,6 @@ onUnmounted(() => {
   <div class="card card-body blur shadow-blur mx-3 mx-md-2 mt-5">
     
     <h2 class="text-center mb-4">Datasets</h2>
-    <p class="lead text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
   
     <div class="container">
       <div class="row justify-content-center">
@@ -285,7 +281,7 @@ onUnmounted(() => {
             class="px-lg-1 mt-lg-0 mt-4 p-4"
             :icon="{ component: 'receipt_long', color: 'dark' }"
             title="London Data"
-            description="Exploring the sources of London data store."
+            description="Provided by the London data store, this dataset contains information on the economic health of London by borough."
             :action="{
               route:
                 'https://data.london.gov.uk/',
