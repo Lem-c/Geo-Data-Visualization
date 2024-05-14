@@ -25,19 +25,27 @@
 </template>
 
 <script>
+import { nextTick } from 'vue';
+
 export default {
   mounted() {
-    this.initTableauViz();
+    nextTick(() => {
+      this.initTableauViz();
+    });
   },
   methods: {
     initTableauViz() {
       const divElement = document.getElementById('viz1715596789093');
-      const vizElement = divElement.getElementsByTagName('object')[0];
-      this.adjustVizSize(divElement, vizElement);
+      if (divElement) {
+        const vizElement = divElement.getElementsByTagName('object')[0];
+        if (vizElement) {
+          this.adjustVizSize(divElement, vizElement);
 
-      const scriptElement = document.createElement('script');
-      scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-      vizElement.parentNode.insertBefore(scriptElement, vizElement);
+          const scriptElement = document.createElement('script');
+          scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+          vizElement.parentNode.insertBefore(scriptElement, vizElement);
+        }
+      }
     },
     adjustVizSize(divElement, vizElement) {
       if (divElement.offsetWidth > 800) {

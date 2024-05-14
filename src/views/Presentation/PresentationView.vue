@@ -15,6 +15,7 @@ import TableauDashboardLineExportGoods from "../../components/TableauDashboardLi
 import TableauDashboardLineImportGoods from "../../components/TableauDashboardLineImportGoods.vue"
 import TableauDashboardPieExport from "../../components/TableauDashboardPieExport.vue";
 import TableauDashboardPieImport from "../../components/TableauDashboardPieImport.vue"
+import LondonEco from "../../examples/LondonEco.vue";
 
 //hooks
 const body = document.getElementsByTagName("body")[0];
@@ -66,41 +67,48 @@ onUnmounted(() => {
 
   <div class="card card-body blur shadow-blur mx-3 mx-md-2 mt-n8">
 
-    <div class="container-fluid">
+    <div class="container-fluid" id="map-section">
       <div class="row justify-content-center">
 
         <!-- Right side column that holds Map, Line Chart, and Pie Chart -->
         <div class="col-md-9">
-          <div class="row">
+          <div class="row d-flex justify-content-center">
+
             <!-- Map taking the larger portion at the top right -->
-            <div class="col-12" style="height: 50%;">
-              <TradeMap2 :is-export-mode="isExportMode" />
-              <button @click="isExportMode = !isExportMode"
-                      class="btn btn-primary position-absolute top-0 end-0 m-3">
-                {{ isExportMode ? 'Switch to Import' : 'Switch to Export' }}
-              </button>
+            <div class="col-12  mt-7" style="height: 50%;">
+              <div class="position-relative">
+                <TradeMap2 :is-export-mode="isExportMode" />
+                <button @click="isExportMode = !isExportMode"
+                        class="btn btn-primary position-absolute top-0 end-0 m-3">
+                  {{ isExportMode ? 'Switch to Import' : 'Switch to Export' }}
+                </button>
+              </div>
             </div>
 
             <!-- Row for Line Chart and Pie Chart on the same line -->
-            <div class="col-12 mt-9">
-              <div class="row">
+            <div class="col-12 mt-7">
+              <div class="row d-flex justify-content-center">
                 <!-- Line Chart -->
-                <div class="col-md-6" style="height: 50%;">
-                  <div>
+                <div class="col-md-6 d-flex align-items-center justify-content-center" style="height: 50%;">
+                  <div style="width: 100%;">
                     <component :is="isExportMode ? TableauDashboardLineExportGoods : TableauDashboardLineImportGoods" />
                   </div>
                 </div>
 
                 <!-- Pie Chart -->
-                <div class="col-md-6" style="height: 50%;">
-                  <component :is="isExportMode ? TableauDashboardPieExport : TableauDashboardPieImport" />
+                <div class="col-md-6 d-flex align-items-center justify-content-center" style="height: 50%;">
+                  <div style="width: 100%;">
+                    <component :is="isExportMode ? TableauDashboardPieExport : TableauDashboardPieImport" />
+                  </div>
                 </div>
               </div>
             </div>
+
           </div>
         </div>
       </div>
     </div>
+
 
 
 
@@ -112,13 +120,22 @@ onUnmounted(() => {
     >
       <div
         class="page-header py-6 py-md-5 my-sm-3 mb-3 border-radius-xl"
+        id="london-section"
         :style="{
-          backgroundImage: `url(${wavesWhite})`
+          display: 'flex',                 // Added for flexbox layout
+          flexDirection: 'column',         // Directs children to align vertically
+          alignItems: 'center',            // Centers children horizontally
+          justifyContent: 'center',        // Centers children vertically
+          backgroundImage: `url(${wavesWhite})`,
+          height: '100vh',
+          margin: '0 auto',                // Centers the block horizontally
+          backgroundSize: 'cover',         // Ensures the background image covers the div
+          backgroundPosition: 'center'     // Centers the background image
         }"
         loading="lazy"
       >
         <span class="mask bg-gradient-dark"></span>
-
+        <LondonEco />
       </div>
     </div>
 

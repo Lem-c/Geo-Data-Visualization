@@ -25,28 +25,44 @@
 </template>
 
 <script>
+import { nextTick } from 'vue';
+
 export default {
   mounted() {
-    const divElement = document.getElementById('viz1715595483636');
-    const vizElement = divElement.getElementsByTagName('object')[0];
-    if (divElement.offsetWidth > 800) {
-      vizElement.style.minWidth = '420px';
-      vizElement.style.maxWidth = '600px';
-      vizElement.style.width = '100%';
-      vizElement.style.height = '577px';
-    } else if (divElement.offsetWidth > 500) {
-      vizElement.style.minWidth = '420px';
-      vizElement.style.maxWidth = '600px';
-      vizElement.style.width = '100%';
-      vizElement.style.height = '577px';
-    } else {
-      vizElement.style.width = '100%';
-      vizElement.style.height = '727px';
-    }
+    nextTick(() => {
+      this.initTableauViz();
+    });
+  },
+  methods: {
+    initTableauViz() {
+      const divElement = document.getElementById('viz1715595483636');
+      if (divElement) {
+        const vizElement = divElement.getElementsByTagName('object')[0];
+        if (vizElement) {
+          this.adjustVizSize(divElement, vizElement);
 
-    const scriptElement = document.createElement('script');
-    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-    vizElement.parentNode.insertBefore(scriptElement, vizElement);
+          const scriptElement = document.createElement('script');
+          scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+          vizElement.parentNode.insertBefore(scriptElement, vizElement);
+        }
+      }
+    },
+    adjustVizSize(divElement, vizElement) {
+      if (divElement.offsetWidth > 800) {
+        vizElement.style.minWidth = '420px';
+        vizElement.style.maxWidth = '600px';
+        vizElement.style.width = '100%';
+        vizElement.style.height = '577px';
+      } else if (divElement.offsetWidth > 500) {
+        vizElement.style.minWidth = '420px';
+        vizElement.style.maxWidth = '600px';
+        vizElement.style.width = '100%';
+        vizElement.style.height = '577px';
+      } else {
+        vizElement.style.width = '100%';
+        vizElement.style.height = '727px';
+      }
+    }
   }
 }
 </script>

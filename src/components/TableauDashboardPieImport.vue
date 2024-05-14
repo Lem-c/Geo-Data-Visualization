@@ -25,17 +25,28 @@
 </template>
 
 <script>
+import { nextTick } from 'vue';
+
 export default {
   mounted() {
-    const divElement = document.getElementById('viz1715596428630');
-    const vizElement = divElement.getElementsByTagName('object')[0];
-    this.adjustVizSize(divElement, vizElement);
-
-    const scriptElement = document.createElement('script');
-    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-    vizElement.parentNode.insertBefore(scriptElement, vizElement);
+    nextTick(() => {
+      this.initTableauViz();
+    });
   },
   methods: {
+    initTableauViz() {
+      const divElement = document.getElementById('viz1715596428630');
+      if (divElement) {
+        const vizElement = divElement.getElementsByTagName('object')[0];
+        if (vizElement) {
+          this.adjustVizSize(divElement, vizElement);
+
+          const scriptElement = document.createElement('script');
+          scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+          vizElement.parentNode.insertBefore(scriptElement, vizElement);
+        }
+      }
+    },
     adjustVizSize(divElement, vizElement) {
       if (divElement.offsetWidth > 800) {
         vizElement.style.minWidth = '420px';

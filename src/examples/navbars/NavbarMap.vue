@@ -5,7 +5,7 @@ import { useWindowsWidth } from "../../assets/js/useWindowsWidth";
 
 // images
 import ArrDark from "@/assets/img/down-arrow-dark.svg";
-import downArrow from "@/assets/img/down-arrow.svg";
+// import downArrow from "@/assets/img/down-arrow.svg";
 import DownArrWhite from "@/assets/img/down-arrow-white.svg";
 
 const props = defineProps({
@@ -110,96 +110,95 @@ watch(
       "
     >
 
-        <RouterLink
-            class="navbar-brand d-none d-md-block"
-            :class="[
-            (props.transparent && textDark.value) || !props.transparent
-                ? 'text-dark font-weight-bolder ms-sm-3'
-                : 'text-white font-weight-bolder ms-sm-3'
-            ]"
-            :to="{ name: 'presentation' }"
-            rel="tooltip"
-            title="Designed and Coded by Creative Tim"
-            data-placement="bottom"
-        >
-            Home
-        </RouterLink>
+      <RouterLink
+          class="navbar-brand d-none d-md-block"
+          :class="[
+          (props.transparent && textDark.value) || !props.transparent
+              ? 'text-dark font-weight-bolder ms-sm-3'
+              : 'text-white font-weight-bolder ms-sm-3'
+          ]"
+          :to="{ name: 'presentation' }"
+          rel="tooltip"
+          title="Designed and Coded by Creative Tim"
+          data-placement="bottom"
+      >
+          Home
+      </RouterLink>
 
-        <button
-            class="navbar-toggler shadow-none ms-2"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navigation"
-            aria-controls="navigation"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-        >
-            <span class="navbar-toggler-icon mt-2">
-            <span class="navbar-toggler-bar bar1"></span>
-            <span class="navbar-toggler-bar bar2"></span>
-            <span class="navbar-toggler-bar bar3"></span>
-            </span>
-        </button>
+      <button
+          class="navbar-toggler shadow-none ms-2"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navigation"
+          aria-controls="navigation"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+      >
+          <span class="navbar-toggler-icon mt-2">
+          <span class="navbar-toggler-bar bar1"></span>
+          <span class="navbar-toggler-bar bar2"></span>
+          <span class="navbar-toggler-bar bar3"></span>
+          </span>
+      </button>
 
-        <div
-            class="collapse navbar-collapse w-100 pt-3 pb-2 py-lg-0"
-            id="navigation"
-        >
-            <ul class="navbar-nav navbar-nav-hover ms-auto">
-            <li class="nav-item dropdown dropdown-hover mx-2">
-                <a
-                role="button"
-                class="nav-link ps-2 d-flex cursor-pointer align-items-center"
-                :class="getTextColor()"
-                id="dropdownMenuPages"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-                >
-                <i
-                    class="material-icons opacity-6 me-2 text-md"
-                    :class="getTextColor()"
-                    >dashboard</i
-                >
-                Pages
-                <img
-                    :src="getArrowColor()"
-                    alt="down-arrow"
-                    class="arrow ms-2 d-lg-block d-none"
-                />
-                <!-- <img
-                    :src="getArrowColor()"
-                    alt="down-arrow"
-                    class="arrow ms-1 d-lg-none d-block ms-auto"
-                /> -->
-                </a>
+      <div
+        class="collapse navbar-collapse w-100 pt-3 pb-2 py-lg-0"
+        id="navigation"
+      >
+        <ul class="navbar-nav navbar-nav-hover ms-auto d-flex justify-content-center w-100">
+          <li class="nav-item flex-grow-1 text-center">
+            <a href="#map-section" class="nav-link d-flex justify-content-center align-items-center">
+              <i class="material-icons opacity-6 me-2 text-md">map</i>
+              Global View
+            </a>
+          </li>
 
-                <div
-                class="dropdown-menu dropdown-menu-animation ms-n3 dropdown-md p-3 border-radius-xl mt-0 mt-lg-3"
-                aria-labelledby="dropdownMenuPages"
-                >
-                <div class="row d-none d-lg-block">
-                    <div class="col-12 px-4 py-2">
-                    <div class="row">
-                        <div class="position-relative">
-                        <div
-                            class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-1"
-                        >
-                            Features
-                        </div>
-                        <RouterLink
-                            :to="{ name: 'stations' }"
-                            class="dropdown-item border-radius-md"
-                        >
-                            <span>UK stations</span>
-                        </RouterLink>
-                        </div>
+          <li class="nav-item flex-grow-1 text-center">
+            <a href="#map-section" class="nav-link d-flex justify-content-center align-items-center">
+              <i class="material-icons opacity-6 me-2 text-md">map</i>
+              SubRegion
+            </a>
+          </li>
+
+          <li class="nav-item flex-grow-1 text-center">
+            <a href="#london-section" class="nav-link d-flex justify-content-center align-items-center">
+              <i class="material-icons opacity-6 me-2 text-md">location_city</i>
+              What Happened in London
+            </a>
+          </li>
+
+          <li class="nav-item flex-grow-1 dropdown text-center">
+            <a
+              role="button"
+              class="nav-link d-flex justify-content-center align-items-center"
+              :class="getTextColor()"
+              id="dropdownMenuPages"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <i class="material-icons opacity-6 me-2 text-md" :class="getTextColor()">dashboard</i>
+              Pages
+              <img :src="getArrowColor()" alt="down-arrow" class="arrow ms-2 d-lg-block d-none" />
+            </a>
+            <div class="dropdown-menu dropdown-menu-animation ms-n3 dropdown-md p-3 border-radius-xl mt-0 mt-lg-3" aria-labelledby="dropdownMenuPages">
+              <div class="row d-none d-lg-block">
+                <div class="col-12 px-4 py-2">
+                  <div class="row">
+                    <div class="position-relative">
+                      <div class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-1">
+                        Features
+                      </div>
+                      <a href="#stations" class="dropdown-item border-radius-md">
+                        <span>UK Stations</span>
+                      </a>
                     </div>
-                    </div>
+                  </div>
                 </div>
-                </div>
-            </li>
-            </ul>
-        </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
 </nav>
 
