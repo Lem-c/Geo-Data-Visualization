@@ -54,7 +54,7 @@ defineProps({
             <a :href="brand.route">
               <img :src="brand.logo" class="mb-3 footer-logo" alt="main_logo" />
             </a>
-            <h6 class="font-weight-bolder mb-3">{{ brand.name }}</h6>
+            <h6 class="font-weight-bolder mb-3 text-light">{{ brand.name }}</h6>
           </div>
           <div>
             <ul class="d-flex flex-row ms-n3 nav">
@@ -64,7 +64,7 @@ defineProps({
                 :key="link"
               >
                 <a
-                  class="nav-link pe-1"
+                  class="nav-link pe-1 text-light"
                   :href="link"
                   target="_blank"
                   v-html="icon"
@@ -79,10 +79,10 @@ defineProps({
           v-for="{ name, items } of menus"
           :key="name"
         >
-          <h6 class="text-sm">{{ name }}</h6>
+          <h6 class="text-sm text-light">{{ name }}</h6>
           <ul class="flex-column ms-n3 nav">
-            <li class="nav-item" v-for="item of items" :key="item.name">
-              <a class="nav-link" :href="item.href" target="_blank">
+            <li class="nav-item " v-for="item of items" :key="item.name">
+              <a class="nav-link text-light" :href="item.href" target="_blank">
                 {{ item.name }}
               </a>
             </li>
@@ -91,7 +91,7 @@ defineProps({
 
         <div class="col-12">
           <div class="text-center">
-            <p class="text-dark my-4 text-sm font-weight-normal">
+            <p class="text-light my-4 text-sm font-weight-normal">
               @CASA0003
               {{ new Date().getFullYear() }} 
               Group Mini Project

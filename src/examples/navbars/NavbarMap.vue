@@ -188,7 +188,7 @@ function handleJumpAnimation(event) {
             </a>
           </li>
 
-          <li class="nav-item flex-grow-1 dropdown text-center">
+          <!-- <li class="nav-item flex-grow-1 dropdown text-center">
             <a
               role="button"
               class="nav-link d-flex justify-content-center align-items-center"
@@ -217,7 +217,7 @@ function handleJumpAnimation(event) {
                 </div>
               </div>
             </div>
-          </li>
+          </li> -->
         </ul>
       </div>
     </div>

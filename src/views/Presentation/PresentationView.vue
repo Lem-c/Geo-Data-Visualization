@@ -61,17 +61,14 @@ onUnmounted(() => {
         <div class="row">
           <div class="col-lg-7 text-center mx-auto position-relative">
             <h1
-              class="text-black pt-3 me-2"
+              class="text-black pt-3 me-2 fs-25"
               :style="{ display: 'inline-block', marginTop: '-200px' }"
             >
             — UK's Economic Horizons —
             </h1>
-            <p class="lead text-dark px-5 mt-3" :style="{ fontWeight: '500' }">
+            <p class="lead text-dark px-5 mt-3 mb-10" :style="{ fontWeight: '500' }">
               Interactive dashboards navigating the trajectories of trade and economic resilience at 3 geographic levels
             </p>
-            <p>‏</p>
-            <p>‏</p>
-            <p>‏</p>
           </div>
         </div>
       </div>
