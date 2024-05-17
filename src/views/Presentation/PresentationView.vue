@@ -59,12 +59,12 @@ onUnmounted(() => {
     >
     <div class="container">
         <div class="row">
-          <div class="col-lg-7 text-center mx-auto position-relative">
+          <div class="col-lg-9 text-center mx-auto position-relative">
             <h1
-              class="text-black pt-3 me-2 fs-25"
+              class="text-black pt-3 me-2 display-1"
               :style="{ display: 'inline-block', marginTop: '-200px' }"
             >
-            — UK's Economic Horizons —
+            UK's Economic Horizons
             </h1>
             <p class="lead text-dark px-5 mt-3 mb-10" :style="{ fontWeight: '500' }">
               Interactive dashboards navigating the trajectories of trade and economic resilience at 3 geographic levels
@@ -237,41 +237,38 @@ onUnmounted(() => {
   
     <div class="container">
       <div class="row justify-content-center">
-        <div class="col-lg-4">
+        <div class="col-lg-3 col-md-6 col-sm-12">
           <FilledInfoCard
             class="px-lg-1 mt-lg-0 mt-4 p-4"
-            :icon="{ component: 'receipt_long', color: 'dark' }"
+            :icon="{ component: 'bar_chart', color: 'dark' }"
             title="International Trade Data"
-            description="Exploring the sources of our inspiration and data reveals much."
+            description="UN trade databases provide comprehensive data sources, covering almost every aspect needed for a global view."
             :action="{
-              route:
-                'https://comtradeplus.un.org/',
+              route: 'https://comtradeplus.un.org/',
               label: { text: 'Read more', color: 'info' }
             }"
           />
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-3 col-md-6 col-sm-12">
           <FilledInfoCard
             class="px-lg-1 mt-lg-0 mt-4 p-4"
-            :icon="{ component: 'receipt_long', color: 'dark' }"
+            :icon="{ component: 'public', color: 'dark' }"
             title="Subnational Trade Data"
             description="Provided by the Office for National Statistics, this dataset contains information on the value of goods exported and imported by the UK's various ITL regions."
             :action="{
-              route:
-                'https://www.ons.gov.uk',
+              route: 'https://www.ons.gov.uk',
               label: { text: 'Read more', color: 'info' }
             }"
           />
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-3 col-md-6 col-sm-12">
           <FilledInfoCard
             class="px-lg-1 mt-lg-0 mt-4 p-4"
-            :icon="{ component: 'receipt_long', color: 'dark' }"
+            :icon="{ component: 'location_city', color: 'dark' }"
             title="London Data"
             description="Provided by the London data store, this dataset contains information on the economic health of London by borough."
             :action="{
-              route:
-                'https://data.london.gov.uk/',
+              route: 'https://data.london.gov.uk/',
               label: { text: 'Read more', color: 'info' }
             }"
           />
@@ -290,54 +287,50 @@ onUnmounted(() => {
     
     <div class="container">
       <div class="row justify-content-center">
-        <div class="col-lg-4">
+        <div class="col-lg-3 col-md-6 col-sm-12">
           <FilledInfoCard
             class="px-lg-1 mt-lg-0 mt-4 p-4"
-            :icon="{ component: 'receipt_long', color: 'dark' }"
+            :icon="{ component: 'code', color: 'dark' }"
             title="D3.js"
-            description="D3.js was alongside the various other tools to create a cohesive interactive environment (international/subnational/local)."
+            description="D3.js was used alongside various other tools to create a cohesive interactive environment (international/subnational/local)."
             :action="{
-              route:
-                'https://d3js.org',
+              route: 'https://d3js.org',
               label: { text: 'd3js.org', color: 'info' }
             }"
           />
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-3 col-md-6 col-sm-12">
           <FilledInfoCard
             class="px-lg-1 mt-lg-0 mt-4 p-4"
-            :icon="{ component: 'receipt_long', color: 'dark' }"
+            :icon="{ component: 'map', color: 'dark' }"
             title="DataMaps"
             description="D3 sublibrary used to create orthographic map projection (international)."
             :action="{
-              route:
-                'https://datamaps.github.io',
+              route: 'https://datamaps.github.io',
               label: { text: 'datamaps.github.io', color: 'info' }
             }"
           />
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-3 col-md-6 col-sm-12">
           <FilledInfoCard
             class="px-lg-1 mt-lg-0 mt-4 p-4"
-            :icon="{ component: 'receipt_long', color: 'dark' }"
+            :icon="{ component: 'dashboard', color: 'dark' }"
             title="Tableau"
             description="Tableau was used to create various dashboards (international/subnational/local)."
             :action="{
-              route:
-                'https://www.tableau.com/en-gb',
+              route: 'https://www.tableau.com/en-gb',
               label: { text: 'tableau.com', color: 'info' }
             }"
           />
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-3 col-md-6 col-sm-12">
           <FilledInfoCard
             class="px-lg-1 mt-lg-0 mt-4 p-4"
-            :icon="{ component: 'receipt_long', color: 'dark' }"
+            :icon="{ component: 'place', color: 'dark' }"
             title="Mapbox"
             description="Mapbox was used to create the various interactive maps (subnational/local)."
             :action="{
-              route:
-                'https://www.mapbox.com',
+              route: 'https://www.mapbox.com',
               label: { text: 'mapbox.com', color: 'info' }
             }"
           />
