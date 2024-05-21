@@ -29,7 +29,7 @@ data() {
     contents: [
         {
         title: "Economic Health: Navigating Sustainable Urban Growth",
-        text: "Economic health can have a profound impact on urban development, infrastructure, and the well-being of the population. Strong economic health ensures funding for public services such as health care, education, and transportation, which are essential components of urban life. In addition, economic strategy affects likelihood of private investment in urban areas, determining employment opportunities and influencing business patterns, all while affecting everything from housing and business development to cultural and recreational facilities. Understanding and planning for economic fluctuations is therefore essential for effectively managing sustainable urban growth.",
+        text: "Economic health profoundly impacts urban development, infrastructure, and population well-being. Strong economies fund essential public services like healthcare, education, and transportation, vital for urban life. Economic strategies attract private investment, shaping employment, business, housing, and cultural facilities. Thus, understanding and planning for economic fluctuations are crucial for sustainable urban growth.",
         },
         {
         title: "Shaping the Future City",
@@ -74,7 +74,6 @@ methods: {
     z-index: 1;
 }
 .slider-control {
-    background: rgba(255, 255, 255, 0.5);
     width: 40px;
     height: 100px;
     display: flex;
