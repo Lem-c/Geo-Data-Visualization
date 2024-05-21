@@ -41,9 +41,6 @@ onUnmounted(() => {
 
 <template>
 
-  
-
-
   <div class="container-fluid position-sticky z-index-sticky top-0">
     <div class="row">
       <div class="col-12">
@@ -75,8 +72,7 @@ onUnmounted(() => {
     </div>
   </Header>
 
-  <div 
-  class="card card-body blur shadow-blur mx-2 mx-lg-3 mt-n8"
+  <div
   id="text-section"
   >
     <ClickSlider />
@@ -218,10 +214,10 @@ onUnmounted(() => {
     <div class="container-fluid" id="london-data-section">
       <div class="row justify-content-center">
         <!-- Right side column that holds Map, Line Chart, and Pie Chart -->
-        <div class="col-md-9">
+        <div class="col-md-12">
           <div class="row d-flex justify-content-center">
             <!-- Map taking the larger portion at the top right -->
-            <div class="col-12 mt-7">
+            <div class="mt-7">
               <div class="position-relative">
                 <LucyTableau />
               </div>

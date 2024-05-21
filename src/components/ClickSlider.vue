@@ -1,8 +1,8 @@
 <template>
 <div id="content-slider">
-    <div class="container-fluid mt-6">
+    <div class="card card-body blur shadow-blur container-fluid mt-n8">
         <div class="row justify-content-center">
-            <div class="col-lg-8">
+            <div class="col-lg-8 pt-2">
             <div v-for="(content, index) in contents" :key="index" v-show="index === currentIndex">
                 <h2 class="text-center">{{ content.title }}</h2>
                 <p class="lead text-start">{{ content.text }}</p>
