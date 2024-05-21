@@ -408,15 +408,14 @@ export default {
 
 #chart {
   position: absolute;
-  bottom: 0; /* Positioned 5% from the bottom of the map */
-  width: 380px; /* Width of the chart */
+  bottom: -5%; /* Positioned 5% from the bottom of the map */
+  width: 550px; /* Width of the chart */
   height: 250px; /* Height of the chart */
-  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+  padding-left: 1%;
+  background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent background */
   z-index: 10; /* Ensure it's above the map */
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 
 #tooltip {

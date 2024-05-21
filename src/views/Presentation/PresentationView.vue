@@ -202,7 +202,7 @@ onUnmounted(() => {
           alignItems: 'center',            // Centers children horizontally
           justifyContent: 'center',        // Centers children vertically
           backgroundImage: `url(${wavesWhite})`,
-          height: '120vh',
+          height: '110vh',
           margin: '0 auto',                // Centers the block horizontally
           backgroundSize: 'cover',         // Ensures the background image covers the div
           backgroundPosition: 'center'     // Centers the background image
