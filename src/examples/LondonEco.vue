@@ -49,7 +49,7 @@ export default {
         container: 'map',
         style: 'mapbox://styles/mapbox/light-v10',
         center: [-0.1276, 51.425],
-        zoom: 9.5,
+        zoom: 9.3,
         scrollZoom: false, // Disable zooming with scroll wheel
         doubleClickZoom: false, // Disable zooming with double click
         touchZoomRotate: false // Disable zooming and rotating with touch gestures

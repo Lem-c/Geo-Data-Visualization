@@ -5,7 +5,7 @@
             <div class="col-lg-8">
             <div v-for="(content, index) in contents" :key="index" v-show="index === currentIndex">
                 <h2 class="text-center">{{ content.title }}</h2>
-                <p class="lead text-start mb-4">{{ content.text }}</p>
+                <p class="lead text-start">{{ content.text }}</p>
             </div>
             </div>
         </div>

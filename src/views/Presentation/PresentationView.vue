@@ -76,7 +76,7 @@ onUnmounted(() => {
   </Header>
 
   <div 
-  class="card card-body blur shadow-blur mx-3 mx-md-4 mt-n6"
+  class="card card-body blur shadow-blur mx-2 mx-lg-3 mt-n8"
   id="text-section"
   >
     <ClickSlider />
