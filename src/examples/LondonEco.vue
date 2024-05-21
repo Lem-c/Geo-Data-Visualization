@@ -47,7 +47,7 @@ export default {
     initializeMap() {
       this.map = new mapboxgl.Map({
         container: 'map',
-        style: 'mapbox://styles/mapbox/dark-v10',
+        style: 'mapbox://styles/mapbox/light-v10',
         center: [-0.1276, 51.425],
         zoom: 9.5,
         scrollZoom: false, // Disable zooming with scroll wheel
@@ -388,7 +388,7 @@ export default {
 }
 
 #title { 
-  color: white; /* Change the title color to white */
+  color: black; /* Change the title color to white */
   text-align: center;
   font-size: 50px;
   z-index: 1001; /* Above all other content */
@@ -396,7 +396,7 @@ export default {
 
 #description {
   margin-bottom: 20px; /* Adds some space below the title */
-  color: white; /* Ensure the text color is white for readability */
+  color: black; /* Ensure the text color is white for readability */
   z-index: 1000;
   font-size: 18px;
 }
@@ -441,12 +441,11 @@ export default {
 
 #selections {
   position: absolute;
-  top: 30%;
+  top: 27%;
   right: 10px;
   color: black;
   background: #CDE8E5; /* Adds a semi-transparent dark background */
   border: 2px solid white;
-  padding-top: 5px;
   align-items: center;
   z-index: 1001;
   transform: translate(0%, 0%); /* Aligns the element correctly at the top right */

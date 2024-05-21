@@ -76,7 +76,7 @@ onUnmounted(() => {
   </Header>
 
   <div 
-  class="card card-body blur shadow-blur mx-3 mx-md-2 mt-n6"
+  class="card card-body blur shadow-blur mx-3 mx-md-4 mt-n6"
   id="text-section"
   >
     <ClickSlider />
@@ -191,7 +191,7 @@ onUnmounted(() => {
       class="container-fluid mt-sm-5 border-radius-xl"
       id="london-section"
       :style="{
-        background: 'linear-gradient(195deg, rgb(66, 66, 74), rgb(25, 25, 25))'
+        background: '#E8F9FD' // Changed background to white
       }"
     >
       <div
@@ -209,10 +209,11 @@ onUnmounted(() => {
         }"
         loading="lazy"
       >
-        <span class="mask bg-gradient-dark"></span>
+        <!-- <span class="mask bg-gradient-dark"></span> -->
         <LondonEco />
       </div>
     </div>
+
 
     <div class="container-fluid" id="london-data-section">
       <div class="row justify-content-center">

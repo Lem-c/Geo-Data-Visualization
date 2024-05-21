@@ -1,6 +1,6 @@
 <template>
 <div id="content-slider">
-    <div class="container-fluid mt-7">
+    <div class="container-fluid mt-6">
         <div class="row justify-content-center">
             <div class="col-lg-8">
             <div v-for="(content, index) in contents" :key="index" v-show="index === currentIndex">
