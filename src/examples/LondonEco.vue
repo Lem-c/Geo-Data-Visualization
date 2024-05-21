@@ -49,7 +49,7 @@ export default {
         container: 'map',
         style: 'mapbox://styles/mapbox/dark-v10',
         center: [-0.1276, 51.425],
-        zoom: 9.4,
+        zoom: 9.5,
         scrollZoom: false, // Disable zooming with scroll wheel
         doubleClickZoom: false, // Disable zooming with double click
         touchZoomRotate: false // Disable zooming and rotating with touch gestures
@@ -390,7 +390,7 @@ export default {
 #title { 
   color: white; /* Change the title color to white */
   text-align: center;
-  font-size: 55px;
+  font-size: 50px;
   z-index: 1001; /* Above all other content */
 }
 
@@ -398,7 +398,7 @@ export default {
   margin-bottom: 20px; /* Adds some space below the title */
   color: white; /* Ensure the text color is white for readability */
   z-index: 1000;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 #map {
@@ -409,8 +409,8 @@ export default {
 #chart {
   position: absolute;
   bottom: 0; /* Positioned 5% from the bottom of the map */
-  width: 650px; /* Width of the chart */
-  height: 400px; /* Height of the chart */
+  width: 380px; /* Width of the chart */
+  height: 250px; /* Height of the chart */
   background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
   z-index: 10; /* Ensure it's above the map */
   display: flex;
@@ -442,7 +442,7 @@ export default {
 
 #selections {
   position: absolute;
-  top: 25%;
+  top: 30%;
   right: 10px;
   color: black;
   background: #CDE8E5; /* Adds a semi-transparent dark background */

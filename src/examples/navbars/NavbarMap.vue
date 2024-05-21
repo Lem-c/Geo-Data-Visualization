@@ -155,40 +155,35 @@ function handleJumpAnimation(event) {
         <ul class="navbar-nav navbar-nav-hover ms-auto d-flex justify-content-center w-100">
           <li class="nav-item flex-grow-1 text-center" @click="handleJumpAnimation">
             <a href="#text-section"
-             class="nav-link d-flex justify-content-center align-items-center"
-             :style="{ fontSize: '1.25rem' }">
+             class="nav-link d-flex justify-content-center align-items-center">
               <i class="material-icons opacity-6 me-2 text-md">home</i>
               About
             </a>
           </li>
 
           <li class="nav-item flex-grow-1 text-center" @click="handleJumpAnimation">
-            <a href="#map-section" class="nav-link d-flex justify-content-center align-items-center"
-            :style="{ fontSize: '1.25rem' }">
+            <a href="#map-section" class="nav-link d-flex justify-content-center align-items-center">
               <i class="material-icons opacity-6 me-2 text-md">explore</i>
               Explore UK Trade in Goods
             </a>
           </li>
 
           <li class="nav-item flex-grow-1 text-center" @click="handleJumpAnimation">
-            <a href="#region-section" class="nav-link d-flex justify-content-center align-items-center"
-            :style="{ fontSize: '1.25rem' }">
+            <a href="#region-section" class="nav-link d-flex justify-content-center align-items-center">
               <i class="material-icons opacity-6 me-2 text-md">public</i>
               Sub Region
             </a>
           </li>
 
           <li class="nav-item flex-grow-1 text-center" @click="handleJumpAnimation">
-            <a href="#london-section" class="nav-link d-flex justify-content-center align-items-center"
-            :style="{ fontSize: '1.25rem' }">
+            <a href="#london-section" class="nav-link d-flex justify-content-center align-items-center">
               <i class="material-icons opacity-6 me-2 text-md">location_city</i>
               What Happened in London
             </a>
           </li>
 
           <li class="nav-item flex-grow-1 text-center" @click="handleJumpAnimation">
-            <a href="#london-data-section" class="nav-link d-flex justify-content-center align-items-center"
-            :style="{ fontSize: '1.25rem' }">
+            <a href="#london-data-section" class="nav-link d-flex justify-content-center align-items-center">
               <i class="material-icons opacity-6 me-2 text-md">analytics</i>
               London In details
             </a>

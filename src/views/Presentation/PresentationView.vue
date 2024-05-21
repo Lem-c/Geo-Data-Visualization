@@ -61,12 +61,12 @@ onUnmounted(() => {
         <div class="row">
           <div class="col-lg-9 text-center mx-auto position-relative">
             <h1
-              class="text-black pt-3 me-2 display-1"
+              class="text-black pt-3 me-2 display-5 fw-bold"
               :style="{ display: 'inline-block', marginTop: '-200px' }"
             >
             UK's Economic Horizons
             </h1>
-            <p class="lead text-dark px-5 mt-3 mb-10" :style="{ fontWeight: '500' }">
+            <p class="lead text-dark px-5 mt-3 mb-10" :style="{ fontWeight: '400' }">
               Interactive dashboards navigating the trajectories of trade and economic resilience at 3 geographic levels
             </p>
           </div>
@@ -76,7 +76,7 @@ onUnmounted(() => {
   </Header>
 
   <div 
-  class="card card-body blur shadow-blur mx-3 mx-md-2 mt-n8"
+  class="card card-body blur shadow-blur mx-3 mx-md-2 mt-n6"
   id="text-section"
   >
     <ClickSlider />
@@ -202,7 +202,7 @@ onUnmounted(() => {
           alignItems: 'center',            // Centers children horizontally
           justifyContent: 'center',        // Centers children vertically
           backgroundImage: `url(${wavesWhite})`,
-          height: '95vh',
+          height: '120vh',
           margin: '0 auto',                // Centers the block horizontally
           backgroundSize: 'cover',         // Ensures the background image covers the div
           backgroundPosition: 'center'     // Centers the background image

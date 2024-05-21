@@ -1,22 +1,22 @@
 <template>
 <div id="content-slider">
     <div class="container-fluid mt-7">
-    <div class="row justify-content-center">
-        <div class="col-lg-8">
-        <div v-for="(content, index) in contents" :key="index" v-show="index === currentIndex">
-            <h2 class="text-center mb-4">{{ content.title }}</h2>
-            <p class="lead text-center">{{ content.text }}</p>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+            <div v-for="(content, index) in contents" :key="index" v-show="index === currentIndex">
+                <h2 class="text-center">{{ content.title }}</h2>
+                <p class="lead text-start mb-4">{{ content.text }}</p>
+            </div>
+            </div>
         </div>
-        </div>
-    </div>
     </div>
     <div class="slider-controls">
-    <div class="slider-control prev" @click="prevSlide">
-        <span>&lt;</span>
-    </div>
-    <div class="slider-control next" @click="nextSlide">
-        <span>&gt;</span>
-    </div>
+        <div class="slider-control prev" @click="prevSlide">
+            <span>&lt;</span>
+        </div>
+        <div class="slider-control next" @click="nextSlide">
+            <span>&gt;</span>
+        </div>
     </div>
 </div>
 </template>

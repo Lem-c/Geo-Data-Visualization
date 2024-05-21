@@ -1,11 +1,50 @@
 <template>
   <div>
     <label for="destination">Select among the top 10 trading partners ></label>
-    <select id="destination" v-model="selectedPartnerISO" @change="drawMap">
+    <!-- <select id="destination" v-model="selectedPartnerISO" @change="drawMap">
       <option v-for="partner in partners" :key="partner.iso" :value="partner.iso">
         {{ displayName(partner.name) }}
       </option>
-    </select>
+    </select> -->
+
+    <div class="d-flex align-items-center mb-2">
+      <!-- Buttons for the first three elements -->
+      <button
+        v-for="(partner, index) in partners.slice(0, 3)"
+        :key="partner.iso"
+        :value="partner.iso"
+        @click="selectPartner(partner.iso)"
+        class="btn btn-success me-2"
+      >
+        {{ displayName(partner.name) }}
+      </button>
+
+      <!-- Dropdown for the remaining elements -->
+      <div class="dropdown d-inline-block" style="margin: 0%;">
+        <button
+          class="btn btn-info dropdown-toggle"
+          type="button"
+          id="morePartnersDropdown"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          More Partners
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="morePartnersDropdown">
+          <li
+            v-for="partner in partners.slice(3)"
+            :key="partner.iso"
+          >
+            <a
+              class="dropdown-item"
+              @click="selectPartner(partner.iso)"
+            >
+              {{ displayName(partner.name) }}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
 
     <div class="position-relative" style="width: 100%; height: 700px;">
       <div
@@ -54,6 +93,11 @@
     const words = name.split(' ');
     return words.slice(0, 2).join(' ');
   }
+
+  const selectPartner = (iso) => {
+    selectedPartnerISO.value = iso;
+    drawMap();
+  };
 
   const fills = {
     defaultFill: "#D3D3D3",
