@@ -198,11 +198,28 @@
   
     map.graticule();
   
-    map.arc(
+
+    if(props.isExportMode){
+        map.arc(
+        [
+          {
+            origin: UK_COORDS,
+            destination: destination,
+          },
+        ],
+        {
+          greatArc: true,
+          animationSpeed: 1500,
+          strokeWidth: 4,
+          arcSharpness: 1.4,
+        }
+      );
+    }else{
+      map.arc(
       [
         {
-          origin: UK_COORDS,
-          destination: destination,
+          origin: destination,
+          destination: UK_COORDS,
         },
       ],
       {
@@ -212,6 +229,7 @@
         arcSharpness: 1.4,
       }
     );
+    }
   
     return map;
   };
