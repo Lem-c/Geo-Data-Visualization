@@ -2,7 +2,7 @@
 
 This repo contains raw source code and static web files that deployed on the github.
 
-**Group Members**: **Juanes Lamilla**, **Yuhao Chen**, **Zihan iu**
+**Group Members**: **[Juanes Lamilla](https://github.com/JuanesLamilla)**, **[Yuhao Chen](https://github.com/Lem-c)**, **[Zihan iu](https://github.com/ZihanLiulucy)**
 
 This project is based on the templet: [Vue Material Kit](https://www.creative-tim.com/learning-lab/vue/overview/material-kit/) under the vue-vite environment (VueJS 3 + Bootstrap 5).
 
